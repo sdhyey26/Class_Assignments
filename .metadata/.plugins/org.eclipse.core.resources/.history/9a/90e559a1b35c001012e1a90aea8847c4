@@ -1,0 +1,13 @@
+package com.tss.model;
+
+public class StudentModel {
+	public StudentModel(String name, int rollNo, int marks) {
+		super();
+		this.name = name;
+		this.rollNo = rollNo;
+		this.marks = marks;
+	}
+	private String name;
+	private int rollNo;
+	private int marks;
+}

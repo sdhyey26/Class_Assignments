@@ -1,0 +1,168 @@
+package com.tss.test;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+
+import com.tss.model.playlistModel;
+
+public class playlist1est {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		Set<playlistModel> songs = new LinkedHashSet<>();
+		
+		System.out.println("Playlist management system is intialized successfully !!");
+		System.out.println("1. Add a song/songs");
+		System.out.println("2. Remove songs");
+		System.out.println("3. Search a song by title");
+		System.out.println("4. Display all the songs");
+		System.out.println("5. Choose for Shuffling the songs");
+		System.out.println("6. Search a song by title");
+		
+		boolean isTrue = true;
+		while(isTrue) {
+			System.out.println("Enter your choice : ");
+			int choice = sc.nextInt();
+
+			switch(choice) {
+			
+			case 1 : {
+				enterSongs(songs , sc);
+			}break;
+			
+			case 2 :{
+				System.out.println("Enter the title of the song you want to remove : ");
+				String title = sc.nextLine();
+				
+				removeSongs(title , songs , sc);
+			}break;
+			
+			case 3 :{
+				System.out.println("Enter the title of the song you want to remove : ");
+				String title = sc.nextLine();
+				
+				searchByTitle(title , songs , sc);
+			}break;
+			
+			case 4 :{
+				displaySongs(songs);
+			}break;
+			
+			case 5 :{
+				shuffleSongs(songs);
+			}break;
+			
+			case 6 :{
+				isTrue = false;
+			}break;
+			
+			default:
+				System.out.println("enter the valid case !!");
+			}
+		}
+
+	}
+
+	public static void enterSongs(Set<playlistModel> songs, Scanner sc) {
+		System.out.println("Enter the number of Songs you wanna add : ");
+		int count = sc.nextInt();
+		String title, artist;
+		int duration;
+
+		for (int i = 0; i < count; i++) {
+			System.out.println("Enter song title : ");
+			title = sc.nextLine();
+			System.out.println("Enter the artist name : ");
+			artist = sc.nextLine();
+			sc.nextLine();
+			System.out.println("Enter the duration of the song : ");
+			duration = sc.nextInt();
+			songs.add(new playlistModel(title, artist, duration));
+		}
+		
+		for(playlistModel song : songs) {
+			System.out.println(song.toString());
+		}
+
+	}
+
+	public static void removeSongs(String title, Set<playlistModel> songs, Scanner sc) {
+		if (songs.isEmpty()) {
+			System.out.println("the current playlist is empty notthing to display!!");;
+		} else {
+			for (playlistModel song : songs) {
+				System.out.println(song);
+			}
+			System.out.print("Enter the song title you want to delete: ");
+			String songTitle = sc.next();
+			boolean isFound = false;
+			playlistModel toRemove = null;
+			for (playlistModel song : songs) {
+				if (songTitle.equals(song.getTitle())) {
+					toRemove = song;
+					System.out.println("Song deleted successfully.");
+					isFound = true;
+				}
+			}
+			if (!isFound) {
+				System.out.println("Enter a valid Song title to delete");
+			} else {
+				songs.remove(toRemove);
+			}
+		}
+	}
+	
+	public static void searchByTitle(String title , Set<playlistModel> songs , Scanner sc ) {
+		if (songs.isEmpty()) {
+			System.out.println("the current playlist is empty notthing to display/Search!!");;
+		}
+		else {
+			boolean isFound = false;
+			for(playlistModel song : songs) {
+				if(title.equals(song.getTitle())) {
+					System.out.println(song.toString());
+					System.out.println("press enter to play the song !!");
+				}
+				isFound = true;
+			}
+			if(!isFound) {
+				System.out.println("The title you provided is not present !!");
+			}
+		}
+	}
+	
+	public static void displaySongs(Set<playlistModel> songs) {
+		if (songs.isEmpty()) {
+			System.out.println("the current playlist is empty notthing to display/Search!!");;
+		}
+		for(playlistModel song : songs ) {
+			System.out.println(song.toString());
+		}
+	}
+	
+	public static void shuffleSongs(Set<playlistModel> songs) {
+		List<playlistModel> shuffledList = new ArrayList<>();
+		for(playlistModel song : songs) {
+			shuffledList.add(song);
+
+		}
+		songs.removeAll(songs);
+		Collections.shuffle(shuffledList);
+		
+		for(playlistModel song : shuffledList) {
+			songs.add(song);
+		}
+		
+		System.out.println("your playlist is shuffled successfully!!");
+		
+		for(playlistModel song : shuffledList) {
+			System.out.println(song.toString());;
+		}
+	}
+}

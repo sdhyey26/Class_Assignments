@@ -1,0 +1,34 @@
+package com.tss.withoutViolation.test;
+
+import java.util.Scanner;
+
+import com.tss.withoutViolation.model.InvoiceModel;
+
+public class InvoiceTest {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		int id;
+		String description;
+		double cost;
+		double discountPercent;
+
+		System.out.println("Enter id : " );
+		id = sc.nextInt();
+		
+		System.out.println("Enter Description : ");
+		description = sc.next();
+		
+		System.out.println("Enter cost : ");
+		cost = sc.nextDouble();
+		
+		System.out.println("Enter discount Percent : ");
+		discountPercent= sc.nextDouble();
+		
+		InvoiceModel invoiceModel = new InvoiceModel(id , description , cost , discountPercent);
+		
+		printBill print = new printBill();
+		
+		
+	}
+}

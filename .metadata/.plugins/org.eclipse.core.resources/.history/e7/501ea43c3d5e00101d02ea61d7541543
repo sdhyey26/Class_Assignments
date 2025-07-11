@@ -1,0 +1,8 @@
+package com.tss.structural.Adapter.model;
+
+public interface Iitems {
+
+	public void getName();
+	
+	public void getPrice();
+}

@@ -1,0 +1,17 @@
+package com.tss.NonViolation.test;
+
+import java.util.Scanner;
+
+public class IpayTest {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("select the options you wanna pay with !!");
+		
+		System.out.println("credit cardc(c) / Upi(u)");
+		
+		String choice = s
+		
+		
+		
+	}
+}

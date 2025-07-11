@@ -1,0 +1,10 @@
+package com.tss.abstractFactory.test;
+
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String[] args) {
+		System.out.println("Enter your choice : 1.Maruti 2.Mahindra 3.Tata");
+		Scanner sc = new Scanner(System.in);
+	}
+}

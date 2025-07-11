@@ -1,0 +1,14 @@
+package com.tss.CarApp.model;
+
+public class CarFactory {
+	public Icars makeCars(CarTypes car) {
+		
+		if(car.Mahindra) {
+			return new Mahindra();
+		}
+		
+		
+		return null;
+		
+	}
+}

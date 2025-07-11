@@ -1,0 +1,33 @@
+package com.tss.structural.Adapter.test;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.tss.structural.Adapter.model.Biscuit;
+import com.tss.structural.Adapter.model.CartItems;
+import com.tss.structural.Adapter.model.Iitems;
+
+public class Test {
+	public static void main(String[] args) {
+		System.out.println("Enter the things you wanted to add : 1.biscuit 2.chocolate 3.hat");
+		
+		Scanner sc = new Scanner(System.in);
+		
+		CartItems list = new CartItems();
+		ArrayList<Iitems> items = new ArrayList<>();
+		
+		boolean isTrue = true;
+		while(isTrue) {
+			int choice = sc.nextInt();
+			
+			switch(choice) {
+			case 1 : 
+			{
+				Iitems biscuit = new Biscuit("Oreo" , 10);
+				items.add(biscuit);
+			}break;
+			}
+			
+		}
+	}
+}

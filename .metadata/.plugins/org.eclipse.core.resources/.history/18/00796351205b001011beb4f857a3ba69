@@ -1,0 +1,19 @@
+package com.tss.withoutViolation.test;
+
+import java.util.Scanner;
+
+import com.tss.withoutViolation.model.InvoiceModel;
+
+public class InvoiceTest {
+	public static void main(String[] args) {
+		InvoiceModel invoiceModel = new InvoiceModel();
+		Scanner sc = new Scanner(System.in);
+
+		int id;
+		String description;
+		double cost;
+		double discountPercent;
+
+		System.out.println("Enter ");
+	}
+}

@@ -1,0 +1,5 @@
+package com.tss.Interface;
+
+public interface Iunflyable extends Ibird {
+
+}

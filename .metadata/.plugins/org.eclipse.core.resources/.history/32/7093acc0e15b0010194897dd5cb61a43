@@ -1,0 +1,22 @@
+package com.tss.NonViolation.model;
+
+import com.tss.Interface.Iworker;
+import com.tss.NonViolation.IFeedable;
+
+public class Robot implements IFeedable {
+
+	@Override
+	public void eat() {
+		// TODO Auto-generated method stub
+        System.out.println("Robot starts working");
+
+	}
+
+	@Override
+	public void drink() {
+		// TODO Auto-generated method stub
+        System.out.println("Robot stops working");
+
+	}
+
+}

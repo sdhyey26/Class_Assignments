@@ -1,0 +1,20 @@
+package com.tss.test;
+
+import java.util.function.Supplier;
+
+import com.tss.model.BillModel;
+
+public class BillTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		BillModel items = new BillModel("laptop", 45000);
+		
+		Supplier<BillModel> addedTax = ()->{
+			double shippingprice = 50;
+			items.setFinalAmount(shippingprice);
+			return items;
+		};
+	}
+
+}

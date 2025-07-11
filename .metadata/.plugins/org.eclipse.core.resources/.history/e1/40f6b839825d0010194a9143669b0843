@@ -1,0 +1,11 @@
+package com.tss.Furniture.model;
+
+public class ChairFactory implements IFurnitureFactory{
+
+	@Override
+	public IStyle furniture(FurnitureType type) {
+
+		
+	}
+
+}

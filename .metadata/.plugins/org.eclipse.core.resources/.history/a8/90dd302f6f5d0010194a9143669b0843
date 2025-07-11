@@ -1,0 +1,5 @@
+package dom.tss.creational.singleton.model;
+
+public class DbConnection {
+
+}

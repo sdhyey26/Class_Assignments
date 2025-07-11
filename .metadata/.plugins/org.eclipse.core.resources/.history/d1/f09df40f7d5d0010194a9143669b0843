@@ -1,0 +1,36 @@
+package com.tss.abstractFactory.test;
+
+import java.util.Scanner;
+
+import com.tss.abstractFactory.model.Icars;
+import com.tss.abstractFactory.model.MarutiFactory;
+
+public class Test {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter your choice : 1.Maruti 2.Mahindra 3.Tata");
+		
+		int choice = sc.nextInt();
+		Icars car = null;
+		
+		if(choice == 1) {
+			MarutiFactory maruti = new MarutiFactory();
+			 car = maruti.makeCar();
+			 car.start();
+			 car.stop();
+		}
+		if(choice == 2) {
+			MarutiFactory mahindra = new MarutiFactory();
+			 car = mahindra.makeCar();
+			 car.start();
+			 car.stop();
+		}
+		if(choice == 3) {
+			MarutiFactory Tata = new MarutiFactory();
+			 car = mahindra.makeCar();
+			 car.start();
+			 car.stop();
+		}
+		
+	}
+}

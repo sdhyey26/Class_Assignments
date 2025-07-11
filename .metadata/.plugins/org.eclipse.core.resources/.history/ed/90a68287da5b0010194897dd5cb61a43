@@ -1,0 +1,5 @@
+package com.tss.Interface;
+
+public interface  extends Ibird {
+	public void cannotFly();
+}

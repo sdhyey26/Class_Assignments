@@ -1,0 +1,38 @@
+package com.tss.Furniture.test;
+
+import java.util.Scanner;
+
+import com.tss.Furniture.model.FurnitureStyle;
+import com.tss.Furniture.model.IFurnitureFactory;
+import com.tss.Furniture.model.IStyle;
+import com.tss.Furniture.model.TableFactory;
+
+public class Test {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("enter the style : 1.Modern 2.Victorian");
+		
+		int choice = sc.nextInt();
+		
+		IStyle f = null;
+		
+		if(choice == 1) {
+			System.out.println("enter the style : 1.table 2.chair 3.sofa");
+			int furniture = sc.nextInt();
+			
+			if(furniture == 1) {
+				TableFactory table = new TableFactory();
+				f = table.furniture(FurnitureStyle.Modern);
+			}
+			if(furniture == 2) {
+				TableFactory chair = new TableFactory();
+				f = chair.furniture(FurnitureStyle.Modern);
+			}
+			if(furniture == 3) {
+				TableFactory sofa = new TableFactory();
+				f = sofa.furniture(FurnitureStyle.Modern);
+			}
+		}
+	}
+}

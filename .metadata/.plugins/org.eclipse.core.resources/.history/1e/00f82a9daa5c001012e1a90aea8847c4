@@ -1,0 +1,13 @@
+package com.tss.test;
+
+import com.tss.model.IPattern;
+
+public class PatternTest {
+	public static void main(String[] args) {
+		
+		
+		IPattern ipattern = () -> {
+			Scanner sc = new Scanner(System.in);
+		};
+	}
+}

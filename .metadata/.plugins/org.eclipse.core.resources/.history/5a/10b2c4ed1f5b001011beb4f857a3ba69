@@ -1,0 +1,40 @@
+package com.tss.withoutViolation.model;
+
+public class InvoiceModel {
+	
+	static int id;
+    static String description;
+    static double cost;
+    static double discountPercent;
+	static final double tax = 10.0;
+        
+    public static double getTax() {
+		return tax;
+	}
+	
+	public static int getId() {
+		return id;
+	}
+	public static void setId(int id) {
+		InvoiceModel.id = id;
+	}
+	public static String getDescription() {
+		return description;
+	}
+	public static void setDescription(String description) {
+		InvoiceModel.description = description;
+	}
+	public static double getCost() {
+		return cost;
+	}
+	public static void setCost(double cost) {
+		InvoiceModel.cost = cost;
+	}
+	public static double getDiscountPercent() {
+		return discountPercent;
+	}
+	public static void setDiscountPercent(double discountPercent) {
+		InvoiceModel.discountPercent = discountPercent;
+	}
+
+}

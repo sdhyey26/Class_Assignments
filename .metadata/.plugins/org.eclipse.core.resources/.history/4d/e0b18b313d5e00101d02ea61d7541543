@@ -1,0 +1,5 @@
+package com.tss.structural.Adapter.model;
+
+public interface Iitems {
+
+}

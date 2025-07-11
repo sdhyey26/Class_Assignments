@@ -1,0 +1,17 @@
+1752141706553	Rename package 'com.tss.CarApp'
+1752141753939	Rename package 'com.tss.CarApp.model'
+1752141788740	Rename package 'com.tss.CarApp.factory.model'
+1752141834134	Rename package 'com.tss.CarApp.test'
+1752144592640	Delete element
+1752146660195	Delete element
+1752146671434	Delete element
+1752147296755	Rename type 'FurnitureType'
+1752221162947	Delete element
+1752221283401	Delete element
+1752221329690	Rename type 'BurgerBuilder'
+1752222348779	Delete element
+1752222695742	Rename package 'dom.tss.creational.singleton.model'
+1752222714955	Rename package 'dom.tss.creational.singleton.test'
+1752222981558	Delete element
+1752227671094	Rename package 'com.tss.structural.Adapte'
+1752232047249	Rename compilation unit 'wheekAlign.java'

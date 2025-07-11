@@ -1,0 +1,50 @@
+package com.tss.model;
+
+public class playlistModel {
+	
+	
+	private String artist ;
+	public String getArtist() {
+		return artist;
+	}
+
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+
+	public int getDuration() {
+		return duration;
+	}
+
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	private int duration;	
+	private String title;
+	
+	
+	public playlistModel(String title, String artist, int duration) {
+		super();
+		this.title = title;
+		this.artist = artist;
+		this.duration = duration;
+	}
+	
+	
+	
+}

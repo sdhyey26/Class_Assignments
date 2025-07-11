@@ -1,0 +1,13 @@
+package com.tss.test;
+
+public class Byfunction {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		bifunction<Integer , Integer , Integer> f = () ->
+		{
+			
+			
+		};
+	}
+}

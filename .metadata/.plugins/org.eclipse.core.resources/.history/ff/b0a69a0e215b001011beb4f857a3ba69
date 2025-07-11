@@ -1,0 +1,26 @@
+package com.tss.withoutViolation.model;
+
+public class PrintBill {
+	public static void printBill(InvoiceModel invoice) {
+		
+		CalculateModel calculateModel = new CalculateModel();
+		InvoiceModel invoiceModel =new  InvoiceModel();
+		
+	    double discountAmount = calculateModel.calculateDiscount();
+	    double taxAmount = calculateModel.calculateTax();
+	    double finalAmount = calculateModel.calculateFinalCost();
+
+	    System.out.println("\n===== INVOICE =====");
+	    System.out.println("ID: " + invoiceModel.getId());
+	    System.out.println("Description: " + invoiceModel.getDescription());
+	    System.out.printf("Base Cost: %.2f\n", invoiceModel.getCost());
+	    System.out.printf("Discount (%.1f%%): -%.2f\n", invoiceModel.getDiscountPercent(), discountAmount);
+	    System.out.printf("Tax (%.1f%%): +%.2f\n", invoiceModel.getTax(), taxAmount);
+	    System.out.println("---------------------------");
+	    System.out.printf("Final Amount: %.2f\n", finalAmount);
+	    System.out.println("=====================");
+	}
+	
+
+}
+

@@ -1,0 +1,8 @@
+package com.tss.structural.Adapter.model;
+
+public class CartItems {
+	
+	
+	private ArrayList<Iitems> items = new ArrayList<>();
+	
+}

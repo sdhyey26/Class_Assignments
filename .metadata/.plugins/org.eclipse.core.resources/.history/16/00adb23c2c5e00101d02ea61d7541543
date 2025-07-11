@@ -1,0 +1,22 @@
+package com.tss.builder.test;
+
+public class PizzaTest {
+
+    public static void main(String[] args) {
+        // Using the builder to create a Pizza object
+        Pizza pizza = new Pizza.PizzaBuilder()
+                .setDough("Cheesy Crust")
+                .setSauce("Barbecue")
+                .setTopping("Chicken & Olives")
+                .build();
+
+        // Output the pizza details
+        System.out.println(pizza);
+
+        // Access individual properties using getters
+        System.out.println("Dough   : " + pizza.getDough());
+        System.out.println("Sauce   : " + pizza.getSauce());
+        System.out.println("Topping : " + pizza.getTopping());
+    }
+
+}

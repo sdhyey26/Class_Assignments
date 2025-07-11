@@ -1,0 +1,37 @@
+package com.tss.test;
+
+
+class FixedDeposit {
+    private int accountNumber;
+    private String name;
+    private double principal;
+    private int duration;
+    private String festival;
+
+    public FixedDeposit(int accountNumber, String name, double principal, int duration, String festival) {
+        this.accountNumber = accountNumber;
+        this.name = name;
+        this.principal = principal;
+        this.duration = duration;
+        this.festival = festival;
+    }
+
+    public double calculateSimpleInterest() {
+        double rate = 0.0;
+
+        if ("Diwali".equalsIgnoreCase(festival)) {
+            rate = 0.08;
+        } else if ("Holi".equalsIgnoreCase(festival)) {
+            rate = 0.075;
+        } else {
+            rate = 0.07; 
+        }
+
+        return (principal * rate * duration);
+    }
+
+    public static void main(String[] args) {
+        FixedDeposit fd1 = new FixedDeposit(101, "Ajay", 1000, 2, "Diwali");
+        System.out.println("Interest: " + fd1.calculateSimpleInterest());
+    }
+}

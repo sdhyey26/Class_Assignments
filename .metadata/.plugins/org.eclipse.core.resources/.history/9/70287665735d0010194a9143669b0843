@@ -1,0 +1,7 @@
+package com.tss.CarApp.model;
+
+public class CarFactory {
+	public Icars makeCars(CarTypes car) {
+		
+	}
+}

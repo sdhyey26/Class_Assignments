@@ -1,0 +1,14 @@
+package com.tss.factory.TransportApp.model;
+
+public class VehicleFactory {
+	public static LicenceGenerator getVehicle(VehicleType type) {
+		
+		if(type = type.Two_wheeler) {
+			
+		}
+		
+		
+		
+		return null;
+	}
+}

@@ -1,0 +1,8 @@
+package com.tss.interface;
+
+public interface Iworker {
+    void startWork();
+    void stopWork();
+    void eat();
+    void drink();
+}

@@ -1,0 +1,6 @@
+package com.tss.CarApp.factory.model;
+
+public interface Icars {
+	public void start();
+	public void stop();
+}

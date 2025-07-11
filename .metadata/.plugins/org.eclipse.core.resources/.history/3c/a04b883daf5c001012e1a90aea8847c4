@@ -1,0 +1,11 @@
+package com.tss.usingInbuilt;
+
+import java.util.function.Consumer;
+
+public class CalculateFactorial {
+	public static void main(String[] args) {
+		Consumer fact = ()->{
+			
+		};
+	}
+}

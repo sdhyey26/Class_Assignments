@@ -1,0 +1,19 @@
+package com.tss.structural.Adapter.model;
+
+public class HatAdapter implements Iitems{
+
+	Hat hat = new Hat();
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return (String) hat.getLongName() + hat.getShortName();
+	}
+
+	@Override
+	public int getPrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

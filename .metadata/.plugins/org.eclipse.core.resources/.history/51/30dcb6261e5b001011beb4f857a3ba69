@@ -1,0 +1,5 @@
+package com.tss.withoutViolation.model;
+
+public class CalculateModel {
+	InvoiceModel invoice = new InvoiceModel();
+}

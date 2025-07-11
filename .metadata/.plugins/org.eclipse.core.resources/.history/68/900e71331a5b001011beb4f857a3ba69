@@ -1,0 +1,16 @@
+package com.tss.test;
+
+public class InvoiceVIolationSystem {
+
+	
+	int id;
+	String description;
+	double cost;
+	double discountPercent;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

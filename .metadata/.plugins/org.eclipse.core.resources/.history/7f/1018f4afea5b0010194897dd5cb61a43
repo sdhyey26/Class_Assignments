@@ -1,0 +1,10 @@
+package com.tss.NonViolation.test;
+
+public class IpayTest {
+	public static void main(String[] args) {
+		System.out.println("select the options you wanna pay with !!");
+		
+		Scanner sc = new Scanner(System.in);
+		
+	}
+}

@@ -1,0 +1,20 @@
+package com.tss.test;
+import com.tss.model.*;
+
+public class StudentTest {
+	public static void main(String[] args) {
+		
+		 	StudentModel s1 = new Student("Alice", 1, 85);
+	        StudentModel s2 = new Student("Bob", 2, 90);
+	        StudentModel s3 = new Student("Charlie", 3, 78);
+	        StudentModel s4 = new Student("David", 4, 92);
+	        StudentModel s5 = new Student("Eva", 5, 88);
+	        StudentModel s6 = new Student("Frank", 6, 75);
+	        StudentModel s7 = new Student("Grace", 7, 95);
+	        StudentModel s8 = new Student("Hannah", 8, 80);
+	        StudentModel s9 = new Student("Ian", 9, 89);
+	        StudentModel s10 = new Student("Jane", 10, 84);
+	        
+	        
+	}
+}

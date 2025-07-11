@@ -1,0 +1,17 @@
+package dom.tss.creational.singleton.model;
+
+public class DbConnection {
+	
+	DbConnection connectiom = null;
+	
+	private DbConnection() {
+		
+	}
+	
+	public static DbConnection DbConnection() {
+		if(connection == null) {
+			connection = new DbConnection();
+		}
+		
+	}
+}

@@ -1,0 +1,5 @@
+package com.tss.structural.decorative.model;
+
+public class wheekAlign extends CarServiceDecorator{
+
+}

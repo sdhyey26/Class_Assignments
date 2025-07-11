@@ -1,0 +1,21 @@
+package com.tss.test;
+
+import com.tss.model.ChristmasInterest;
+import com.tss.model.DiwaliInterest;
+import com.tss.model.FixedDeposit;
+import com.tss.model.HoliInterest;
+import com.tss.model.NormalInterest;
+
+public class Main {
+    public static void main(String[] args) {
+        FixedDeposit diwaliFD = new FixedDeposit(101, "Ajay", 1000, 2, new DiwaliInterest());
+        FixedDeposit holiFD = new FixedDeposit(102, "Sunita", 2000, 3, new HoliInterest());
+        FixedDeposit christmasFD = new FixedDeposit(103, "Rahul", 1500, 2, new ChristmasInterest());
+        FixedDeposit normalFD = new FixedDeposit(104, "Priya", 1800, 1, new NormalInterest());
+
+        System.out.println("Diwali Interest: " + diwaliFD.calculateSimpleInterest());
+        System.out.println("Holi Interest: " + holiFD.calculateSimpleInterest());
+        System.out.println("Christmas Interest: " + christmasFD.calculateSimpleInterest());
+        System.out.println("Normal Interest: " + normalFD.calculateSimpleInterest());
+    }
+}

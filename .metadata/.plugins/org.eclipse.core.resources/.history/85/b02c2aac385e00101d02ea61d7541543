@@ -1,0 +1,17 @@
+package com.tss.structural.facade.model;
+
+public class IndianHotel extedns Ihotel {
+
+	@Override
+	public void displayMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

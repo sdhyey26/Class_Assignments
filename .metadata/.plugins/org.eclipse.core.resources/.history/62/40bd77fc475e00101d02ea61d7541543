@@ -1,0 +1,20 @@
+package com.tss.structural.decorative.test;
+
+import java.util.Scanner;
+
+public class test {
+
+	public static void main(String[] args) {
+		System.out.println("Enter the choice : 1.regular 2.oil change 3.wheel align 4.both 5.Exit");
+		Scanner sc = new Scanner(System.in);
+		int total ;
+		boolean isTrue = true;
+		
+		while(isTrue) {
+			System.out.println("enter choice : ");
+			int choice = sc.nextInt();
+			
+			switch()
+		}
+	}
+}

@@ -1,0 +1,10 @@
+package com.tss.withoutViolation.model;
+
+public class CalculateModel {
+	
+
+	 public static double calculateTax() {
+		 InvoiceModel invoice = new InvoiceModel();
+	        return (invoice.getCost() * invoice.getTax()) / 100;
+	    }
+}

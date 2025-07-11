@@ -1,0 +1,12 @@
+package com.tss.factory.TransportApp.model;
+
+public class VehicleFactory {
+	public static LicenceGenerator getVehicle(LicenceGenerator type) {
+		
+		
+		
+		
+		
+		return null;
+	}
+}

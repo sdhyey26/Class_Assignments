@@ -1,0 +1,14 @@
+package com.tss.NonViolation.test;
+
+public class WorkTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        Iworker labour = new Labour();
+        labour.startWork();
+
+        IWorkable robo = new Robot();
+        robo.startWork();
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.tss.model;
+
+
+@FunctionalInterface
+public interface Isum {
+	public int sum();
+}

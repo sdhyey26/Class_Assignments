@@ -1,0 +1,8 @@
+package com.tss.withoutViolation.test;
+
+public class InvoiceTest {
+	public static void main(String[] args) {
+		InvoiceModel invoiceModel = new InvoiceModel();
+		
+	}
+}

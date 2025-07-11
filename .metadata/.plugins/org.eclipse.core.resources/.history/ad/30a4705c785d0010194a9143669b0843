@@ -1,0 +1,5 @@
+package com.tss.factory.TransportApp.model;
+
+public interface LicenceGenerator {
+	public static String LicenceGenerator();
+}

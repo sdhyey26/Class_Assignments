@@ -1,0 +1,20 @@
+package com.tss.CarApp.model;
+
+public class CarFactory {
+	public Icars makeCars(CarTypes car) {
+		
+		
+		if(car ==  CarTypes.Mahindra) {
+			return new Mahindra();
+		}
+		if(car ==  CarTypes.Maruti) {
+			return new Maruti();
+		}
+		if(car == CarTypes.Tata) {
+			return new Tata();
+		}
+		
+		return null;
+		
+	}
+}

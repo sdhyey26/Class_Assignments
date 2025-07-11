@@ -1,0 +1,9 @@
+package com.tss.test;
+
+public class PatternTest {
+	public static void main(String[] args) {
+		Ipattern ipattern = () -> {
+			
+		};
+	}
+}

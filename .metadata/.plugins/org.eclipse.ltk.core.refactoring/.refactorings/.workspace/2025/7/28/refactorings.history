@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Worker&apos; to &apos;InterfaceSegregation&apos;" description="Rename resource &apos;Worker&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Worker" name="InterfaceSegregation" stamp="1751967557438" updateReferences="true"/>
+</session>

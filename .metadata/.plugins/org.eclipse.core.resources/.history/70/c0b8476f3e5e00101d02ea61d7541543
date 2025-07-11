@@ -1,0 +1,27 @@
+package com.tss.structural.Adapter.model;
+
+public class Hat {
+	public int getShortName() {
+		return shortName;
+	}
+	public void setShortName(int shortName) {
+		this.shortName = shortName;
+	}
+	public int getLongName() {
+		return LongName;
+	}
+	public void setLongName(int longName) {
+		LongName = longName;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	private String shortName ;
+	private String LongName ;
+	private int price ;
+	
+	
+}

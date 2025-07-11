@@ -1,0 +1,24 @@
+package com.tss.builder.model;
+
+public class PizzaBuilder {
+    String dough;
+     String sauce;
+     String topping;
+
+    public void setDough(String dough) {
+        this.dough = dough;
+    
+    }
+
+    public void setSauce(String sauce) {
+        this.sauce = sauce;
+    }
+
+    public void PizzaBuilder setTopping(String topping) {
+        this.topping = topping;
+    }
+
+    public Pizza build() {
+        return new Pizza(this);
+    }
+}

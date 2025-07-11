@@ -1,0 +1,31 @@
+package com.tss.builder.model.*;
+
+public class Pizza {
+    private String dough;
+    private String sauce;
+    private String topping;
+    
+    private Pizza(PizzaBuilder builder) {
+        this.dough = builder.dough;
+        this.sauce = builder.sauce;
+        this.topping = builder.topping;
+    }
+    public String getDough() {
+        return dough;
+    }
+
+    public String getSauce() {
+        return sauce;
+    }
+
+    public String getTopping() {
+        return topping;
+    }
+    
+    @Override
+    public String toString() {
+        return "Pizza with " + dough + ", " + sauce + ", " + topping;
+    }
+    
+    
+}

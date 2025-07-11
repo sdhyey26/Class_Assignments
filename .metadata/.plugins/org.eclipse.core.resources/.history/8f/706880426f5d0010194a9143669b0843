@@ -1,0 +1,13 @@
+package dom.tss.creational.singleton.model;
+
+public class DbConnection {
+	
+	
+	private DbConnection() {
+		
+	}
+	
+	public static DbConnection() {
+		
+	}
+}

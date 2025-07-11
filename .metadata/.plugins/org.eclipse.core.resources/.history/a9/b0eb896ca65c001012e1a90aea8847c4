@@ -1,0 +1,16 @@
+package com.tss.test;
+
+import com.tss.model.DemoImpl;
+import com.tss.model.Idemo;
+
+public class IdemoTest {
+	public static void main(String[] args) {
+		Idemo demo = new Idemo(){
+			public void display() {
+				System.out.println("hey there");
+			}
+		};
+		
+		demo.display();
+	}
+}

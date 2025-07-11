@@ -1,0 +1,7 @@
+package com.tss.model;
+
+public class playlistModel {
+	private String title;
+	private String artist ;
+	private int duration;
+}

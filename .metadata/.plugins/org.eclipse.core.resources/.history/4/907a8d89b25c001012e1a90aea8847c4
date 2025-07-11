@@ -1,0 +1,11 @@
+package com.tss.test;
+
+import java.util.function.BiPredicate;
+
+public class EvenOdd {
+	public static void main(String[] args) {
+		Predicate<Integer > bi = (a , b)->{
+			
+		};
+	}
+}

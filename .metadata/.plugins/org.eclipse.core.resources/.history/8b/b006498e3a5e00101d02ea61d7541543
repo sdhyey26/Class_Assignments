@@ -1,0 +1,9 @@
+package com.tss.structural.facade.model;
+
+public class HotelReception {
+	
+	public void getIndianMenu() {
+		IndianHotel indianHotel = new IndianHotel();
+	}
+	
+}

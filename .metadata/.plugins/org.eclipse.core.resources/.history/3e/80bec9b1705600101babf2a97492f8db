@@ -1,0 +1,16 @@
+package metadata;
+
+public class StringUsingInstanceOF {
+	public static void main(String[] args) {
+		  // Get the constructor that takes a char array
+        Constructor<String> constructor = String.class.getDeclaredConstructor(char[].class);
+        
+        // Make it accessible if it's not public
+        constructor.setAccessible(true);
+        
+        // Create a new instance
+        String str = constructor.newInstance(new char[]{'H', 'e', 'l', 'l', 'o'});
+        
+        System.out.println(str); // Output: Hello
+	}
+}

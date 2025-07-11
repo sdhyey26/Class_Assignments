@@ -1,0 +1,5 @@
+package com.tss.NonViolation.model;
+
+public class Robot implements Iworker {
+
+}
