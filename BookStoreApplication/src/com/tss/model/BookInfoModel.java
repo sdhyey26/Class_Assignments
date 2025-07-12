@@ -35,7 +35,5 @@ public class BookInfoModel {
 	public String toString() {
 		return "BookInfoModel [id=" + id + ", title=" + title + ", author=" + author + ", isIssued=" + isIssued + "]";
 	}
-	
-	
 
 }
