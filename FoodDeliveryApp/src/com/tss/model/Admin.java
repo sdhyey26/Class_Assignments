@@ -5,48 +5,80 @@ import java.util.ArrayList;
 
 public class Admin implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    private static final String ADMIN_FILE = "admin.ser";
+    private static final String MENU_LIST_FILE = "menuList.ser";
+
     public ArrayList<Menu> menuList = new ArrayList<>();
 
-    private static final long serialVersionUID = 1L;
-    private static final String FILE_NAME = "admin.txt";
-    private static final String MENU_LIST_FILE = "menuList.ser"; 
+    private String name = "admin";
+    private String password = "admin"; 
 
-    private String name;
-    private int password;
+    private static class AdminCredentials implements Serializable {
+        private static final long serialVersionUID = 1L;
+        String name;
+        String password;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPassword() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
-            Object obj = ois.readObject();
-            if (obj instanceof Integer) {
-                password = (int) obj;
-            }
-        } catch (FileNotFoundException e) {
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        AdminCredentials(String name, String password) {
+            this.name = name;
+            this.password = password;
         }
-        return password;
     }
 
-    public void setPassword(int password) {
-        this.password = password;
+    public Admin() {
+        loadAdminCredentials(); 
+    }
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            oos.writeObject(password);
+    private void loadAdminCredentials() {
+        File file = new File(ADMIN_FILE);
+        if (file.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                Object obj = ois.readObject();
+                if (obj instanceof AdminCredentials) {
+                    AdminCredentials creds = (AdminCredentials) obj;
+                    this.name = creds.name;
+                    this.password = creds.password;
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            saveAdminCredentials(); 
+        }
+    }
+
+    private void saveAdminCredentials() {
+        AdminCredentials creds = new AdminCredentials(this.name, this.password);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ADMIN_FILE))) {
+            oos.writeObject(creds);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public String getName() {
+        loadAdminCredentials();
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+        saveAdminCredentials();
+    }
+
+    public String getPassword() {
+        loadAdminCredentials();
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+        saveAdminCredentials();
+    }
+
     public void setMenu(String name, double price, String description) {
-        deserializeMenuList(); 
+        deserializeMenuList();
 
         Menu menu = new Menu();
         menu.setDescription(description);
@@ -54,9 +86,8 @@ public class Admin implements Serializable {
         menu.setPrice(price);
 
         menuList.add(menu);
-        serializeMenuList(); 
+        serializeMenuList();
     }
-
 
     public void changeDiscountPercentage(int choice) {
         Discounts discount = new Discounts();
@@ -70,11 +101,10 @@ public class Admin implements Serializable {
             e.printStackTrace();
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     private void deserializeMenuList() {
-        File file = new File("menuList.ser");
-
+        File file = new File(MENU_LIST_FILE);
         if (!file.exists()) {
             menuList = new ArrayList<>();
             return;
@@ -87,8 +117,7 @@ public class Admin implements Serializable {
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            menuList = new ArrayList<>(); 
+            menuList = new ArrayList<>();
         }
     }
-
 }

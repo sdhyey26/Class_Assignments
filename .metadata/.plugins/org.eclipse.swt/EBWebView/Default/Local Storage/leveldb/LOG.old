@@ -1,3 +1,2 @@
-2025/07/12-15:10:39.035 2b78 Reusing MANIFEST C:\Users\dhyey.shiyal\Desktop\tss\Class_Assignments\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
-2025/07/12-15:10:39.118 2b78 Recovering log #3
-2025/07/12-15:10:39.136 2b78 Reusing old log C:\Users\dhyey.shiyal\Desktop\tss\Class_Assignments\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/000003.log 
+2025/07/13-14:33:28.200 5a4c Creating DB C:\Users\dhyey\Desktop\Class_Assignments\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb since it was missing.
+2025/07/13-14:33:28.230 5a4c Reusing MANIFEST C:\Users\dhyey\Desktop\Class_Assignments\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
