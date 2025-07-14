@@ -173,16 +173,23 @@ public class FoodDeliveryAppMain {
 	    	        if (doneContinue.equals("2")) {
 	    	            System.out.println("Enter id to add to cart: ");
 	    	            int id = sc.nextInt();
+	    	            
+	    	            System.out.println("enter quantity to be added : ");
+	    	            int quantity = sc.nextInt();
+	    	            
 	    	            sc.nextLine(); 
 
-	    	            if (id >= 0 && id < menuList.size()) {
-	    	                Menu item = menuList.get(id);
-	    	                orderList.add(item);
-	    	                total += item.getPrice();
-	    	                System.out.println(item.getFoodName() + " added to cart.");
-	    	            } else {
-	    	                System.out.println("Invalid id.");
+	    	            for(int in = 0 ; in < quantity ; in++) {
+	    	            	 if (id >= 0 && id < menuList.size()) {
+	 	    	                Menu item = menuList.get(id);
+	 	    	                orderList.add(item);
+	 	    	                total += item.getPrice();
+	 	    	                System.out.println(item.getFoodName() + " added to cart.");
+	 	    	            } else {
+	 	    	                System.out.println("Invalid id.");
+	 	    	            }
 	    	            }
+	    	           
 
 	    	        } else if (doneContinue.equals("3")) {
 	    	            System.out.println("Your Bill:");
