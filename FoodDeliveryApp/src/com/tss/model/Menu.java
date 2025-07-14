@@ -37,9 +37,6 @@ public class Menu implements Serializable {
     }
 
 
-
-
-
     public ArrayList<Menu> getMenu() {
         ArrayList<Menu> menuList = new ArrayList<>();
         File file = new File("menuList.ser");
@@ -68,6 +65,6 @@ public class Menu implements Serializable {
     
     @Override
     public String toString() {
-        return "Menu [foodName=" + foodName + ", price=" + price + ", description=" + description + "]";
+        return " foodName=" + foodName + ", price=" + price + ", description=" + description + "]";
     }
 }

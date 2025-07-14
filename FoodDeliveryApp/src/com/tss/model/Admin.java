@@ -2,13 +2,19 @@ package com.tss.model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Admin implements Serializable {
+	Discounts discount = new Discounts();
+	DeliveryAgents deliveryAgents;
+	ArrayList<DeliveryAgents> agentsInfo = new ArrayList<>();
 
+	
     private static final long serialVersionUID = 1L;
-
     private static final String ADMIN_FILE = "admin.ser";
     private static final String MENU_LIST_FILE = "menuList.ser";
+    private static final String AGENT_INFO = "agent.ser";
 
     public ArrayList<Menu> menuList = new ArrayList<>();
 
@@ -90,8 +96,12 @@ public class Admin implements Serializable {
     }
 
     public void changeDiscountPercentage(int choice) {
-        Discounts discount = new Discounts();
+        
         discount.setDiscountPercentage(choice);
+    }
+    
+    public int getDiscountPercentage() {
+    	return discount.getDiscountPercentage();
     }
 
     public void serializeMenuList() {
@@ -119,5 +129,43 @@ public class Admin implements Serializable {
             e.printStackTrace();
             menuList = new ArrayList<>();
         }
+    }
+    
+    public void setDeliveryAgent() {
+        Scanner sc = new Scanner(System.in);
+
+        for (int i = 0; i < 2; i++) {
+        	deliveryAgents = new DeliveryAgents();
+            System.out.println("Enter agent name: ");
+            String name = sc.nextLine();
+            deliveryAgents.setName(name);
+
+            agentsInfo.add(deliveryAgents);
+        }
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(AGENT_INFO))) {
+            oos.writeObject(agentsInfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    public ArrayList<DeliveryAgents> getDeliveryAgent() {
+    	File file = new File(AGENT_INFO);
+        if (!file.exists()) {
+        	agentsInfo = new ArrayList<>();
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            Object obj = ois.readObject();
+            if (obj instanceof ArrayList<?>) {
+            	agentsInfo = (ArrayList<DeliveryAgents>) obj;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            agentsInfo = new ArrayList<>();
+        }
+		return agentsInfo;
     }
 }
