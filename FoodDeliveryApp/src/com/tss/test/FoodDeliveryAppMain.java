@@ -46,7 +46,6 @@ public class FoodDeliveryAppMain {
 		if (name.equals(admin.getName()) && password.equals(admin.getPassword())) {
 			System.out.println("Welcome " + admin.getName() + " !!");
 
-			
 			boolean isTrue = true;
 
 			while (isTrue) {
@@ -55,115 +54,112 @@ public class FoodDeliveryAppMain {
 				System.out.println("3. Change Discount percentage");
 				System.out.println("4. Add/change delivery agents");
 				System.out.println("5. Exit");
-				
+
 				System.out.println("Enter your choice : ");
 				int choice = sc.nextInt();
 				sc.nextLine();
 
 				switch (choice) {
 				case 1: {
-					
+
 					boolean isSubTrue = true;
 					while (isSubTrue) {
 						System.out.println("1.Indian Menu");
 						System.out.println("2.Italain Menu");
 						System.out.println("3.Korean Menu");
 						System.out.println("4.Exit");
-						
-	                	int menuChoice = sc.nextInt();
-	                	
-	                	switch(menuChoice) {
-	                	
-	                	case 1 : 
-	                	{
-	                		while (true) {
-		                        System.out.println("Enter 1 to exit / 2 to continue : ");
-		                        int doneContinue = sc.nextInt();
-		                        sc.nextLine();
-		                        if (doneContinue == 2 ) {
-		                            System.out.println("Enter food name : ");
-		                            String foodName = sc.nextLine();
 
-		                            System.out.println("Enter food price : ");
-		                            double foodPrice = sc.nextDouble();
-		                            sc.nextLine(); 
+						int menuChoice = sc.nextInt();
 
-		                            System.out.println("Enter food description : ");
-		                            String foodDescription = sc.nextLine();
+						switch (menuChoice) {
 
-		                            admin.setIndianMenu(foodName, foodPrice, foodDescription);
-		                        } else if(doneContinue == 1){
-		                            break;
-		                        }
-		                        else {
-		                        	System.out.println("invalid input !!");
-		                        }
-		                    }
-	                	}break;
-	                	
-	                	case 2 : 
-	                	{
-	                		while (true) {
-		                        System.out.println("Enter 1 or 2 to continue : ");
-		                        int doneContinue = sc.nextInt();
-		                        sc.nextLine();
-		                        if (doneContinue == 2) {
-		                            System.out.println("Enter food name : ");
-		                            String foodName = sc.nextLine();
+						case 1: {
+							while (true) {
+								System.out.println("Enter 1 to exit / 2 to continue : ");
+								int doneContinue = sc.nextInt();
+								sc.nextLine();
+								if (doneContinue == 2) {
+									System.out.println("Enter food name : ");
+									String foodName = sc.nextLine();
 
-		                            System.out.println("Enter food price : ");
-		                            double foodPrice = sc.nextDouble();
-		                            sc.nextLine(); 
+									System.out.println("Enter food price : ");
+									double foodPrice = sc.nextDouble();
+									sc.nextLine();
 
-		                            System.out.println("Enter food description : ");
-		                            String foodDescription = sc.nextLine();
+									System.out.println("Enter food description : ");
+									String foodDescription = sc.nextLine();
 
-		                            admin.setItalianMenu(foodName, foodPrice, foodDescription);
-		                        } else if(doneContinue == 1) {
-		                            break;
-		                        }
-		                        else {
-		                        	System.out.println("invalid input !!");
-		                        }
-		                    }
-	                	}break;
-	                	
-	                	case 3 : 
-	                	{
-	                		while (true) {
-		                        System.out.println("Enter 1 or 2 to continue : ");
-		                        int doneContinue = sc.nextInt();
-		                        sc.nextLine();
+									admin.setIndianMenu(foodName, foodPrice, foodDescription);
+								} else if (doneContinue == 1) {
+									break;
+								} else {
+									System.out.println("invalid input !!");
+								}
+							}
+						}
+							break;
 
-		                        if (doneContinue == 2) {
-		                            System.out.println("Enter food name : ");
-		                            String foodName = sc.nextLine();
+						case 2: {
+							while (true) {
+								System.out.println("Enter 1 or 2 to continue : ");
+								int doneContinue = sc.nextInt();
+								sc.nextLine();
+								if (doneContinue == 2) {
+									System.out.println("Enter food name : ");
+									String foodName = sc.nextLine();
 
-		                            System.out.println("Enter food price : ");
-		                            double foodPrice = sc.nextDouble();
-		                            sc.nextLine(); 
+									System.out.println("Enter food price : ");
+									double foodPrice = sc.nextDouble();
+									sc.nextLine();
 
-		                            System.out.println("Enter food description : ");
-		                            String foodDescription = sc.nextLine();
+									System.out.println("Enter food description : ");
+									String foodDescription = sc.nextLine();
 
-		                            admin.setKoreanMenu(foodName, foodPrice, foodDescription);
-		                        } else if(doneContinue == 1){
-		                            break;
-		                        }
-		                        else {
-		                        	System.out.println("invalid choice !!");
-		                        }
-		                    }
-	                	}break;
-	                	
-	                	case 4 : {
-	                		choice = 1;
-	                		isSubTrue = false;
-	                	}
+									admin.setItalianMenu(foodName, foodPrice, foodDescription);
+								} else if (doneContinue == 1) {
+									break;
+								} else {
+									System.out.println("invalid input !!");
+								}
+							}
+						}
+							break;
+
+						case 3: {
+							while (true) {
+								System.out.println("Enter 1 or 2 to continue : ");
+								int doneContinue = sc.nextInt();
+								sc.nextLine();
+
+								if (doneContinue == 2) {
+									System.out.println("Enter food name : ");
+									String foodName = sc.nextLine();
+
+									System.out.println("Enter food price : ");
+									double foodPrice = sc.nextDouble();
+									sc.nextLine();
+
+									System.out.println("Enter food description : ");
+									String foodDescription = sc.nextLine();
+
+									admin.setKoreanMenu(foodName, foodPrice, foodDescription);
+								} else if (doneContinue == 1) {
+									break;
+								} else {
+									System.out.println("invalid choice !!");
+								}
+							}
+						}
+							break;
+
+						case 4: {
+							choice = 1;
+							isSubTrue = false;
+						}
+						}
 					}
 				}
-				}break;
-					
+					break;
 
 				case 2: {
 					System.out.println("Enter the current password : ");
@@ -231,62 +227,60 @@ public class FoodDeliveryAppMain {
 
 		System.out.println("Welcome " + customer.getName() + " !!");
 
-		
-		
 		boolean isTrue = true;
 		int total = 0;
 
 		while (isTrue) {
-			
+
 			System.out.println("1. place order : ");
 			System.out.println("2. display bill : ");
 			System.out.println("3. Proceed to payment");
 			System.out.println("4. Exit");
-			
+
 			System.out.println("Enter your choice : ");
 			int choice = sc.nextInt();
 
 			switch (choice) {
 
 			case 1: {
-				
+
 				boolean isTrueForMenu = true;
-				
-				while(isTrueForMenu) {
-					
+
+				while (isTrueForMenu) {
+
 					System.out.println(" 1. Indian cuisine ");
 					System.out.println(" 2. Italian cuisine ");
 					System.out.println(" 3. korean cuisine ");
 					System.out.println(" 4. Exit ");
-					
+
 					System.out.println("Enter your choice : ");
 					int getMenuChoice = sc.nextInt();
 
-					switch(getMenuChoice) {
-					
-					case 1 : {
+					switch (getMenuChoice) {
+
+					case 1: {
 						int i = 0;
 						ArrayList<IndianMenu> indianMenuList = indianMenu.getMenu();
 
 						for (IndianMenu item : indianMenuList) {
 							System.out.println("[id : " + i++ + "] " + item.toString());
 						}
-		
+
 						sc.nextLine();
-		
+
 						while (true) {
 							System.out.println("Enter 1 to stop, 2 to continue order");
 							String doneContinue = sc.nextLine();
-		
+
 							if (doneContinue.equals("2")) {
 								System.out.println("Enter id to add to cart: ");
 								int id = sc.nextInt();
-		
+
 								System.out.println("enter quantity to be added : ");
 								int quantity = sc.nextInt();
-		
+
 								sc.nextLine();
-		
+
 								for (int in = 0; in < quantity; in++) {
 									if (id >= 0 && id < indianMenuList.size()) {
 										IndianMenu item = indianMenuList.get(id);
@@ -297,7 +291,7 @@ public class FoodDeliveryAppMain {
 										System.out.println("Invalid id.");
 									}
 								}
-		
+
 							} else if (doneContinue.equals("1")) {
 								System.out.println("Order added !!");
 								break;
@@ -305,30 +299,31 @@ public class FoodDeliveryAppMain {
 								System.out.println("Invalid input.");
 							}
 						}
-					}break;
-					
-					case 2 : {
+					}
+						break;
+
+					case 2: {
 						int i = 0;
-						 ArrayList<ItalianMenu> italianMenuList = italianMenu.getMenu();
+						ArrayList<ItalianMenu> italianMenuList = italianMenu.getMenu();
 						for (ItalianMenu item : italianMenuList) {
 							System.out.println("[id : " + i++ + "] " + item.toString());
 						}
-		
+
 						sc.nextLine();
-		
+
 						while (true) {
 							System.out.println("Enter 1 to stop, 2 to continue order");
 							String doneContinue = sc.nextLine();
-		
+
 							if (doneContinue.equals("2")) {
 								System.out.println("Enter id to add to cart: ");
 								int id = sc.nextInt();
-		
+
 								System.out.println("enter quantity to be added : ");
 								int quantity = sc.nextInt();
-		
+
 								sc.nextLine();
-		
+
 								for (int in = 0; in < quantity; in++) {
 									if (id >= 0 && id < italianMenuList.size()) {
 										ItalianMenu item = italianMenuList.get(id);
@@ -339,7 +334,7 @@ public class FoodDeliveryAppMain {
 										System.out.println("Invalid id.");
 									}
 								}
-		
+
 							} else if (doneContinue.equals("1")) {
 								System.out.println("Order added !!");
 								break;
@@ -347,31 +342,32 @@ public class FoodDeliveryAppMain {
 								System.out.println("Invalid input.");
 							}
 						}
-					}break;
-					
-					case 3 : {
+					}
+						break;
+
+					case 3: {
 						int i = 0;
 						ArrayList<KoreanMenu> koreanMenuList = koreanMenu.getMenu();
 
 						for (KoreanMenu item : koreanMenuList) {
 							System.out.println("[id : " + i++ + "] " + item.toString());
 						}
-		
+
 						sc.nextLine();
-		
+
 						while (true) {
 							System.out.println("Enter 1 to stop, 2 to continue order");
 							String doneContinue = sc.nextLine();
-		
+
 							if (doneContinue.equals("2")) {
 								System.out.println("Enter id to add to cart: ");
 								int id = sc.nextInt();
-		
+
 								System.out.println("enter quantity to be added : ");
 								int quantity = sc.nextInt();
-		
+
 								sc.nextLine();
-		
+
 								for (int in = 0; in < quantity; in++) {
 									if (id >= 0 && id < koreanMenuList.size()) {
 										KoreanMenu item = koreanMenuList.get(id);
@@ -382,7 +378,7 @@ public class FoodDeliveryAppMain {
 										System.out.println("Invalid id.");
 									}
 								}
-		
+
 							} else if (doneContinue.equals("1")) {
 								System.out.println("Order added !!");
 								break;
@@ -390,18 +386,33 @@ public class FoodDeliveryAppMain {
 								System.out.println("Invalid input.");
 							}
 						}
-						
-					}break;
-					
-					case 4 : {
+
+					}
+						break;
+
+					case 4: {
 						isTrueForMenu = false;
-					}break;
-					
+					}
+						break;
+
 					}
 				}
-			
-			}break;
-			
+
+			}
+				break;
+
+			case 2: {
+				if (orderList.isEmpty()) {
+					System.out.println("Add something to cart first !!");
+				} else {
+					for (IMenu item : orderList) {
+						System.out.println(item.toString());
+					}
+					System.out.println();
+				}
+			}
+				break;
+
 			}
 		}
 	}
