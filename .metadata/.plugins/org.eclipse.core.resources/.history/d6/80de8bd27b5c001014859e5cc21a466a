@@ -1,5 +1,0 @@
-package com.tss.nonViolation.model;
-
-public interface FileLogger {
-
-}

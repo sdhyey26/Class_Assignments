@@ -1,7 +1,0 @@
-package com.tss.model;
-
-public class BillModel {
-	private String itemName;
-	private double basePrice;
-	private double tax = basePrice + (basePrice*18)/100;
-}

@@ -1,9 +1,0 @@
-package com.tss.NonViolation.model;
-
-public class ShoppingKart {
-	
-	Ipay options ;
-	public void checkOut(Ipay options) {
-		
-	}
-}

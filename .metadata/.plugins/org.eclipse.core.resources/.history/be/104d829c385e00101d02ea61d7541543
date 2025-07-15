@@ -1,5 +1,0 @@
-package com.tss.structural.facade.model;
-
-public class IndianHotel implements Ihotel {
-
-}

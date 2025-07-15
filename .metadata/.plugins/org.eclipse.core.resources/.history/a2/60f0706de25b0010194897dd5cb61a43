@@ -1,8 +1,0 @@
-package com.tss.NonViolation;
-
-public interface Iworker {
-    void startWork();
-    void stopWork();
-    void eat();
-    void drink();
-}

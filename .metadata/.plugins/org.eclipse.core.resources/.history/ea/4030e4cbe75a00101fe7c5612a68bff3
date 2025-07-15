@@ -1,8 +1,0 @@
-package com.tss.model;
-
-public class MoviesListEmptyException extends RuntimeException {
-	public String getMessage()
-	{
-		return "Age Not Valid: You have Entered: "+age;
-	}
-}

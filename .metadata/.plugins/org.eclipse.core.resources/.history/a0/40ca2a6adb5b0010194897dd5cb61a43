@@ -1,5 +1,0 @@
-package com.tss.Interface;
-
-public interface Iflyable extends Ibird{
-	public void canFly();
-}

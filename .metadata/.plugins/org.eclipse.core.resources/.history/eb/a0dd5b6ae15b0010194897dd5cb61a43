@@ -1,7 +1,0 @@
-package com.tss.NonViolation.model;
-
-import com.tss.Interface.Iworker;
-
-public class Robot implements IFeedable {
-
-}

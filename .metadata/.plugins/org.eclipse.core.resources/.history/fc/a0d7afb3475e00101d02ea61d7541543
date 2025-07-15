@@ -1,8 +1,0 @@
-package com.tss.structural.decorative.test;
-
-public class test {
-
-	public static void main(String[] args) {
-		System.out.println("Enter the choice : 1.regular 2.oil change 3.wheel align");
-	}
-}

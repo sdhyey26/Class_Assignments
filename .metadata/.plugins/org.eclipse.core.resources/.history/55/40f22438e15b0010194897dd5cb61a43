@@ -1,5 +1,0 @@
-package com.tss.NonViolation.model;
-
-public class Labour implements IWorker, IFeedable{
-
-}

@@ -1,6 +1,0 @@
-package com.tss.CarApp.model;
-
-public interface Icars {
-	public void start();
-	public void stop();
-}

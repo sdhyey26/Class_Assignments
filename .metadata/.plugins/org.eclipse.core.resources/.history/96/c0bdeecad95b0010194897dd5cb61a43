@@ -1,5 +1,0 @@
-package com.tss.model;
-
-public interface Iflyable {
-	public void canFly();
-}

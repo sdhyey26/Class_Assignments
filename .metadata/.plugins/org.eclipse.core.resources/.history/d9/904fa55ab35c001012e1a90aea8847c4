@@ -1,7 +1,0 @@
-package com.tss.model;
-
-public class StudentModel {
-	private String name;
-	private int rollNo;
-	private int marks;l
-}

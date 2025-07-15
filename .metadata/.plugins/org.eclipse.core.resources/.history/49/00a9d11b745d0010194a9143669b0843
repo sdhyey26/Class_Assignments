@@ -1,7 +1,0 @@
-package com.tss.CarApp.test;
-
-public class CarTest {
-	public static void main(String[] args) {
-		CarFactory factory = new CarFactory();
-	}
-}

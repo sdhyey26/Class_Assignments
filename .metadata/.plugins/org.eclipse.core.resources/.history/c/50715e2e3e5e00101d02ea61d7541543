@@ -1,7 +1,0 @@
-package com.tss.structural.Adapter.model;
-
-public class Hat {
-	private int shortName ;
-	private int LongName ;
-	private int price ;
-}
