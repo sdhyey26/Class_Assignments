@@ -12,7 +12,6 @@ public class KoreanMenu implements Serializable, IMenu {
     private double price;
     private String description;
 
-    // Constructors
     public KoreanMenu() {}
 
     public KoreanMenu(String foodName, double price, String description) {
@@ -21,7 +20,6 @@ public class KoreanMenu implements Serializable, IMenu {
         this.description = description;
     }
 
-    // Getters and Setters
     public String getFoodName() {
         return foodName;
     }
@@ -46,7 +44,6 @@ public class KoreanMenu implements Serializable, IMenu {
         this.description = description;
     }
 
-    // Load menu from file
     public  ArrayList<KoreanMenu> getMenu() {
         ArrayList<KoreanMenu> menuList = new ArrayList<>();
         File file = new File(FILE_NAME);

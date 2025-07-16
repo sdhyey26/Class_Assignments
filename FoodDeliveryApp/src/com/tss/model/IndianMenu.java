@@ -41,7 +41,6 @@ public class IndianMenu implements Serializable,IMenu {
         ArrayList<IndianMenu> menuList = new ArrayList<>();
         File file = new File(FILE_NAME);
 
-        // Check if the file exists and has content
         if (!file.exists() || file.length() == 0) {
             System.out.println("No saved menu list found or file is empty.");
             return menuList;
@@ -79,6 +78,7 @@ public class IndianMenu implements Serializable,IMenu {
     
     @Override
     public String toString() {
-        return " foodName=" + foodName + ", price=" + price + ", description=" + description + "]";
+        return String.format("%-25s ₹%7.2f   %s", foodName, price, description);
     }
+
 }

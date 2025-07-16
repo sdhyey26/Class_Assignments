@@ -9,6 +9,8 @@ import com.tss.model.IMenu;
 import com.tss.model.IndianMenu;
 import com.tss.model.ItalianMenu;
 import com.tss.model.KoreanMenu;
+import com.tss.model.PaymentMethods;
+import com.tss.model.PaymentProceed;
 
 public class FoodDeliveryAppMain {
 
@@ -18,11 +20,19 @@ public class FoodDeliveryAppMain {
 	static IndianMenu indianMenu = new IndianMenu();
 	static ItalianMenu italianMenu = new ItalianMenu();
 	static KoreanMenu koreanMenu = new KoreanMenu();
+	static PaymentProceed payment = new PaymentProceed();
+	static DeliveryAgents agents = new DeliveryAgents();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Welcome to food delivery App !! ");
-		System.out.println("1. Admin Login / 2. normal login");
+		System.out.println("\n====================================");
+		System.out.println("   Welcome to Food Delivery App !!  ");
+		System.out.println("====================================\n");
+
+		System.out.println("Select Login Type:");
+		System.out.println("1. Admin Login");
+		System.out.println("2. Customer Login\n");
+
 		Scanner sc = new Scanner(System.in);
 		int choiceForAdmin = sc.nextInt();
 
@@ -31,185 +41,167 @@ public class FoodDeliveryAppMain {
 		} else if (choiceForAdmin == 2) {
 			customerPanel(sc);
 		} else {
-			System.out.println("please enter valid choice !!");
+			System.out.println("\nPlease enter a valid choice !!\n");
 		}
 	}
 
 	public static void adminPanel(Scanner sc, Admin admin) {
-
-		System.out.println("Enter name : ");
+		System.out.print("\nEnter name: ");
 		String name = sc.next();
 
-		System.out.println("Enter password : ");
+		System.out.print("Enter password: ");
 		String password = sc.next();
 
 		if (name.equals(admin.getName()) && password.equals(admin.getPassword())) {
-			System.out.println("Welcome " + admin.getName() + " !!");
+			System.out.println("\nWelcome " + admin.getName() + " !!\n");
 
 			boolean isTrue = true;
 
 			while (isTrue) {
-				System.out.println("1. Set Menu ");
-				System.out.println("2. Change admin password");
-				System.out.println("3. Change Discount percentage");
-				System.out.println("4. Add/change delivery agents");
-				System.out.println("5. Exit");
-
-				System.out.println("Enter your choice : ");
+				System.out.println("\n=========== Admin Panel ===========");
+				System.out.println("1. Set Menu");
+				System.out.println("2. Change Admin Password");
+				System.out.println("3. Change Discount Percentage");
+				System.out.println("4. Add/Change Delivery Agents");
+				System.out.println("5. Exit\n");
+				System.out.print("Enter your choice: ");
 				int choice = sc.nextInt();
 				sc.nextLine();
 
 				switch (choice) {
 				case 1: {
-
 					boolean isSubTrue = true;
 					while (isSubTrue) {
-						System.out.println("1.Indian Menu");
-						System.out.println("2.Italain Menu");
-						System.out.println("3.Korean Menu");
-						System.out.println("4.Exit");
-
+						System.out.println("\nSelect Cuisine to Modify:");
+						System.out.println("1. Indian Menu");
+						System.out.println("2. Italian Menu");
+						System.out.println("3. Korean Menu");
+						System.out.println("4. Exit\n");
+						System.out.print("Enter your choice: ");
 						int menuChoice = sc.nextInt();
 
 						switch (menuChoice) {
-
 						case 1: {
 							while (true) {
-								System.out.println("Enter 1 to exit / 2 to continue : ");
+								System.out.print("\nEnter 1 to continue, 2 to exit: ");
 								int doneContinue = sc.nextInt();
 								sc.nextLine();
-								if (doneContinue == 2) {
-									System.out.println("Enter food name : ");
-									String foodName = sc.nextLine();
 
-									System.out.println("Enter food price : ");
+								if (doneContinue == 2) {
+									System.out.print("Enter food name: ");
+									String foodName = sc.nextLine();
+									System.out.print("Enter food price: ");
 									double foodPrice = sc.nextDouble();
 									sc.nextLine();
-
-									System.out.println("Enter food description : ");
+									System.out.print("Enter food description: ");
 									String foodDescription = sc.nextLine();
-
 									admin.setIndianMenu(foodName, foodPrice, foodDescription);
-								} else if (doneContinue == 1) {
+								} else if (doneContinue == 2) {
 									break;
 								} else {
-									System.out.println("invalid input !!");
+									System.out.println("Invalid input !!");
 								}
 							}
-						}
 							break;
-
+						}
 						case 2: {
 							while (true) {
-								System.out.println("Enter 1 or 2 to continue : ");
+								System.out.print("\nEnter 1 to continue , 2 to exit ");
 								int doneContinue = sc.nextInt();
 								sc.nextLine();
-								if (doneContinue == 2) {
-									System.out.println("Enter food name : ");
+								if (doneContinue == 1) {
+									System.out.print("Enter food name: ");
 									String foodName = sc.nextLine();
-
-									System.out.println("Enter food price : ");
+									System.out.print("Enter food price: ");
 									double foodPrice = sc.nextDouble();
 									sc.nextLine();
-
-									System.out.println("Enter food description : ");
+									System.out.print("Enter food description: ");
 									String foodDescription = sc.nextLine();
-
 									admin.setItalianMenu(foodName, foodPrice, foodDescription);
-								} else if (doneContinue == 1) {
+								} else if (doneContinue == 2) {
 									break;
 								} else {
-									System.out.println("invalid input !!");
+									System.out.println("Invalid input !!");
 								}
 							}
-						}
 							break;
-
+						}
 						case 3: {
 							while (true) {
-								System.out.println("Enter 1 or 2 to continue : ");
+								System.out.print("\nEnter 1 to continue, 2 to exit");
 								int doneContinue = sc.nextInt();
 								sc.nextLine();
-
 								if (doneContinue == 2) {
-									System.out.println("Enter food name : ");
+									System.out.print("Enter food name: ");
 									String foodName = sc.nextLine();
-
-									System.out.println("Enter food price : ");
+									System.out.print("Enter food price: ");
 									double foodPrice = sc.nextDouble();
 									sc.nextLine();
-
-									System.out.println("Enter food description : ");
+									System.out.print("Enter food description: ");
 									String foodDescription = sc.nextLine();
-
 									admin.setKoreanMenu(foodName, foodPrice, foodDescription);
 								} else if (doneContinue == 1) {
 									break;
 								} else {
-									System.out.println("invalid choice !!");
+									System.out.println("Invalid input !!");
 								}
 							}
-						}
 							break;
-
-						case 4: {
-							choice = 1;
-							isSubTrue = false;
 						}
+						case 4: {
+
+							isSubTrue = false;
+							break;
+						}
+						default:
+							System.out.println("Invalid menu choice.");
 						}
 					}
-				}
 					break;
-
+				}
 				case 2: {
-					System.out.println("Enter the current password : ");
+					System.out.print("\nEnter current password: ");
 					String currentPassword = sc.nextLine();
 
 					if (admin.getPassword().equals(currentPassword)) {
-						System.out.println("Enter the password you want to change to : ");
+						System.out.print("Enter new password: ");
 						String changedPassword = sc.nextLine();
-
 						admin.setPassword(changedPassword);
-
 						System.out.println("Password changed successfully !!");
 					} else {
-						System.out.println("Enter correct password !!");
+						System.out.println("Incorrect password !!");
 					}
-				}
 					break;
-
+				}
 				case 3: {
-					System.out.println("Enter the percentage you want to change to : ");
+					System.out.print("\nEnter new discount percentage: ");
 					int changedDiscount = sc.nextInt();
 					sc.nextLine();
-
 					admin.changeDiscountPercentage(changedDiscount);
-				}
+					System.out.println("Discount percentage updated to: " + admin.getDiscountPercentage() + "%");
 					break;
-
+				}
 				case 4: {
 					admin.setDeliveryAgent();
 					ArrayList<DeliveryAgents> agentInfo = admin.getDeliveryAgent();
-
+					System.out.println("\nCurrent Delivery Agents:");
 					for (DeliveryAgents agent : agentInfo) {
 						System.out.println(agent.toString());
 					}
-				}
 					break;
-
+				}
 				case 5: {
 					isTrue = false;
-					System.out.println("Exiting admin panel.");
-				}
+					System.out.println("\nExiting Admin Panel.\n");
 					break;
-
+				}
 				default: {
-					System.out.println("Invalid choice. Please try again.");
+					System.out.println("Invalid choice. Please try again.\n");
 				}
 				}
 			}
 		} else {
-			System.out.println("Wrong credentials !!");
+			System.out.println("\nWrong credentials !!\n");
 		}
 	}
 
@@ -241,166 +233,144 @@ public class FoodDeliveryAppMain {
 			int choice = sc.nextInt();
 
 			switch (choice) {
-
 			case 1: {
-
 				boolean isTrueForMenu = true;
-
 				while (isTrueForMenu) {
-
 					System.out.println(" 1. Indian cuisine ");
 					System.out.println(" 2. Italian cuisine ");
 					System.out.println(" 3. korean cuisine ");
 					System.out.println(" 4. Exit ");
-
+					System.out.println(
+							"buy of ₹ 500 or above to get " + admin.getDiscountPercentage() + "% of discount!!");
 					System.out.println("Enter your choice : ");
 					int getMenuChoice = sc.nextInt();
 
 					switch (getMenuChoice) {
-
 					case 1: {
 						int i = 0;
 						ArrayList<IndianMenu> indianMenuList = indianMenu.getMenu();
-
 						for (IndianMenu item : indianMenuList) {
 							System.out.println("[id : " + i++ + "] " + item.toString());
 						}
-
 						sc.nextLine();
-
 						while (true) {
-							System.out.println("Enter 1 to stop, 2 to continue order");
+							System.out.println("Enter 1 to continue, 2 to stop ordering");
 							String doneContinue = sc.nextLine();
-
-							if (doneContinue.equals("2")) {
+							if (doneContinue.equals("1")) {
 								System.out.println("Enter id to add to cart: ");
 								int id = sc.nextInt();
-
 								System.out.println("enter quantity to be added : ");
 								int quantity = sc.nextInt();
-
 								sc.nextLine();
-
-								for (int in = 0; in < quantity; in++) {
-									if (id >= 0 && id < indianMenuList.size()) {
-										IndianMenu item = indianMenuList.get(id);
-										orderList.add(item);
-										total += item.getPrice();
-										System.out.println(item.getFoodName() + " added to cart.");
-									} else {
-										System.out.println("Invalid id.");
+								if (quantity <= 0) {
+									System.out.println("Enter valid quantity !");
+								} else {
+									for (int in = 0; in < quantity; in++) {
+										if (id >= 0 && id < indianMenuList.size()) {
+											IndianMenu item = indianMenuList.get(id);
+											orderList.add(item);
+											total += item.getPrice();
+											System.out.println(item.getFoodName() + " added to cart.");
+										} else {
+											System.out.println("Invalid id.");
+										}
 									}
 								}
-
-							} else if (doneContinue.equals("1")) {
-								System.out.println("Order added !!");
+							} else if (doneContinue.equals("2")) {
+								System.out.println("Exiting ordering !!");
 								break;
 							} else {
 								System.out.println("Invalid input.");
 							}
 						}
-					}
 						break;
-
+					}
 					case 2: {
 						int i = 0;
 						ArrayList<ItalianMenu> italianMenuList = italianMenu.getMenu();
 						for (ItalianMenu item : italianMenuList) {
 							System.out.println("[id : " + i++ + "] " + item.toString());
 						}
-
 						sc.nextLine();
-
 						while (true) {
 							System.out.println("Enter 1 to stop, 2 to continue order");
 							String doneContinue = sc.nextLine();
-
 							if (doneContinue.equals("2")) {
 								System.out.println("Enter id to add to cart: ");
 								int id = sc.nextInt();
-
 								System.out.println("enter quantity to be added : ");
 								int quantity = sc.nextInt();
-
 								sc.nextLine();
-
-								for (int in = 0; in < quantity; in++) {
-									if (id >= 0 && id < italianMenuList.size()) {
-										ItalianMenu item = italianMenuList.get(id);
-										orderList.add(item);
-										total += item.getPrice();
-										System.out.println(item.getFoodName() + " added to cart.");
-									} else {
-										System.out.println("Invalid id.");
+								if (quantity <= 0) {
+									System.out.println("Enter valid quantity !");
+								} else {
+									for (int in = 0; in < quantity; in++) {
+										if (id >= 0 && id < italianMenuList.size()) {
+											ItalianMenu item = italianMenuList.get(id);
+											orderList.add(item);
+											total += item.getPrice();
+											System.out.println(item.getFoodName() + " added to cart.");
+										} else {
+											System.out.println("Invalid id.");
+										}
 									}
 								}
-
 							} else if (doneContinue.equals("1")) {
-								System.out.println("Order added !!");
+								System.out.println("Exiting Ordering !!");
 								break;
 							} else {
 								System.out.println("Invalid input.");
 							}
 						}
-					}
 						break;
-
+					}
 					case 3: {
 						int i = 0;
 						ArrayList<KoreanMenu> koreanMenuList = koreanMenu.getMenu();
-
 						for (KoreanMenu item : koreanMenuList) {
 							System.out.println("[id : " + i++ + "] " + item.toString());
 						}
-
 						sc.nextLine();
-
 						while (true) {
 							System.out.println("Enter 1 to stop, 2 to continue order");
 							String doneContinue = sc.nextLine();
-
 							if (doneContinue.equals("2")) {
 								System.out.println("Enter id to add to cart: ");
 								int id = sc.nextInt();
-
 								System.out.println("enter quantity to be added : ");
 								int quantity = sc.nextInt();
-
 								sc.nextLine();
-
-								for (int in = 0; in < quantity; in++) {
-									if (id >= 0 && id < koreanMenuList.size()) {
-										KoreanMenu item = koreanMenuList.get(id);
-										orderList.add(item);
-										total += item.getPrice();
-										System.out.println(item.getFoodName() + " added to cart.");
-									} else {
-										System.out.println("Invalid id.");
+								if (quantity <= 0) {
+									System.out.println("Enter valid quantity !");
+								} else {
+									for (int in = 0; in < quantity; in++) {
+										if (id >= 0 && id < koreanMenuList.size()) {
+											KoreanMenu item = koreanMenuList.get(id);
+											orderList.add(item);
+											total += item.getPrice();
+											System.out.println(item.getFoodName() + " added to cart.");
+										} else {
+											System.out.println("Invalid id.");
+										}
 									}
 								}
-
 							} else if (doneContinue.equals("1")) {
-								System.out.println("Order added !!");
+								System.out.println("Exiting ordering !!");
 								break;
 							} else {
 								System.out.println("Invalid input.");
 							}
 						}
-
-					}
 						break;
-
+					}
 					case 4: {
 						isTrueForMenu = false;
-					}
 						break;
-
+					}
 					}
 				}
-
-			}
 				break;
-
+			}
 			case 2: {
 				if (orderList.isEmpty()) {
 					System.out.println("Add something to cart first !!");
@@ -410,10 +380,55 @@ public class FoodDeliveryAppMain {
 					}
 					System.out.println();
 				}
-			}
 				break;
-
+			}
+			case 3: {
+				if (total > 500) {
+					total = total - (total * admin.getDiscountPercentage() / 100);
+					System.out.println("Discount applied of : " + admin.getDiscountPercentage());
+				}
+				for (IMenu order : orderList) {
+					System.out.println(order.toString());
+				}
+				System.out.println("total : " + total);
+				System.out.println("Please select the mode for payment : 1.UPI 2.Credit Card");
+				int Paymentchoice = sc.nextInt();
+				if (Paymentchoice == 1) {
+					if (orderList.size() % 2 != 0) {
+						agents.setName("Zomato");
+						payment.setPayment(PaymentMethods.UPI, customer.getName(), agents, total);
+						break;
+					} else {
+						agents.setName("Swiggy");
+						payment.setPayment(PaymentMethods.UPI, customer.getName(), agents, total);
+						break;
+					}
+				} else if (Paymentchoice == 2) {
+					if (orderList.size() % 2 != 0) {
+						agents.setName("Zomato");
+						payment.setPayment(PaymentMethods.CREDIT_CARD, customer.getName(), agents, total);
+						break;
+					} else {
+						agents.setName("Swiggy");
+						payment.setPayment(PaymentMethods.CREDIT_CARD, customer.getName(), agents, total);
+						break;
+					}
+				} else {
+					System.out.println("Enter a valid choice !!");
+					choice = 3;
+				}
+				break;
+			}
+			case 4: {
+				System.out.println("Thank you for visiting our food app , visit again !!");
+				break;
+			}
+			default: {
+				System.out.println("Enter a valid choice !!");
+				break;
+			}
 			}
 		}
 	}
+
 }

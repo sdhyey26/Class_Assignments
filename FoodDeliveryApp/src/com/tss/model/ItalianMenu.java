@@ -12,7 +12,6 @@ public class ItalianMenu implements Serializable, IMenu {
     private double price;
     private String description;
 
-    // Constructors
     public ItalianMenu() {}
 
     public ItalianMenu(String foodName, double price, String description) {
@@ -21,7 +20,6 @@ public class ItalianMenu implements Serializable, IMenu {
         this.description = description;
     }
 
-    // Getters and Setters
     public String getFoodName() {
         return foodName;
     }
@@ -46,8 +44,7 @@ public class ItalianMenu implements Serializable, IMenu {
         this.description = description;
     }
 
-    // Load the menu from the file
-    public  ArrayList<ItalianMenu> getMenu() {
+    public ArrayList<ItalianMenu> getMenu() {
         ArrayList<ItalianMenu> menuList = new ArrayList<>();
         File file = new File(FILE_NAME);
 
@@ -82,20 +79,9 @@ public class ItalianMenu implements Serializable, IMenu {
         return menuList;
     }
 
-    // Save the menu list to file
-    public static void saveMenu(ArrayList<ItalianMenu> menuList) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            oos.writeObject(menuList);
-            System.out.println("Italian menu saved successfully.");
-        } catch (IOException e) {
-            System.out.println("Failed to save Italian menu.");
-            e.printStackTrace();
-        }
-    }
-
-    // toString override for pretty output
     @Override
     public String toString() {
-        return "[ foodName=" + foodName + ", price=" + price + ", description=" + description + " ]";
+        return String.format("%-25s ₹%7.2f   %s", foodName, price, description);
     }
+
 }
