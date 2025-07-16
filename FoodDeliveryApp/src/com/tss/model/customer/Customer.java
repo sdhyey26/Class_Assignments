@@ -1,4 +1,4 @@
-package com.tss.model;
+package com.tss.model.customer;
 
 import java.util.ArrayList;
 

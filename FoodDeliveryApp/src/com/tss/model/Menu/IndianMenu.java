@@ -1,4 +1,4 @@
-package com.tss.model;
+package com.tss.model.Menu;
 
 import java.io.*;
 import java.util.ArrayList;

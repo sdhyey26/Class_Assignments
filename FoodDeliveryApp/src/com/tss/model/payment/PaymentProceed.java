@@ -1,7 +1,9 @@
-package com.tss.model;
+package com.tss.model.payment;
 
 import java.util.Scanner;
 import java.util.regex.*;
+
+import com.tss.model.DeliveryAgents.DeliveryAgent;
 
 public class PaymentProceed {
 	Scanner sc = new Scanner(System.in);
@@ -44,7 +46,7 @@ public class PaymentProceed {
 		this.cvv = cvv;
 	}
 
-	public void setPayment(PaymentMethods method, String name, DeliveryAgents agents, int total) {
+	public void setPayment(PaymentMethods method, String name, DeliveryAgent agents, int total) {
 		if (method == PaymentMethods.UPI) {
 			System.out.print("Enter UPI ID: ");
 			String upiId = sc.next();

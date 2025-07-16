@@ -1,20 +1,20 @@
-package com.tss.model;
+package com.tss.model.Menu;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class ItalianMenu implements Serializable, IMenu {
+public class KoreanMenu implements Serializable, IMenu {
 
     private static final long serialVersionUID = 1L;
-    private static final String FILE_NAME = "ItalianMenuList.ser";
+    private static final String FILE_NAME = "KoreanMenuList.ser";
 
     private String foodName;
     private double price;
     private String description;
 
-    public ItalianMenu() {}
+    public KoreanMenu() {}
 
-    public ItalianMenu(String foodName, double price, String description) {
+    public KoreanMenu(String foodName, double price, String description) {
         this.foodName = foodName;
         this.price = price;
         this.description = description;
@@ -44,12 +44,12 @@ public class ItalianMenu implements Serializable, IMenu {
         this.description = description;
     }
 
-    public ArrayList<ItalianMenu> getMenu() {
-        ArrayList<ItalianMenu> menuList = new ArrayList<>();
+    public  ArrayList<KoreanMenu> getMenu() {
+        ArrayList<KoreanMenu> menuList = new ArrayList<>();
         File file = new File(FILE_NAME);
 
         if (!file.exists() || file.length() == 0) {
-            System.out.println("No saved Italian menu found or file is empty.");
+            System.out.println("No saved Korean menu found or file is empty.");
             return menuList;
         }
 
@@ -57,31 +57,32 @@ public class ItalianMenu implements Serializable, IMenu {
             Object obj = ois.readObject();
             if (obj instanceof ArrayList<?>) {
                 for (Object item : (ArrayList<?>) obj) {
-                    if (item instanceof ItalianMenu) {
-                        menuList.add((ItalianMenu) item);
+                    if (item instanceof KoreanMenu) {
+                        menuList.add((KoreanMenu) item);
                     } else {
-                        System.out.println("Warning: Skipping non-ItalianMenu object.");
+                        System.out.println("Warning: Skipped non-KoreanMenu object.");
                     }
                 }
             } else {
-                System.out.println("Invalid menu format in file.");
+                System.out.println("Invalid data format: Expected ArrayList<KoreanMenu>");
             }
         } catch (EOFException e) {
-            System.out.println("Reached end of file unexpectedly. The file might be corrupted.");
+            System.out.println("File is empty or corrupted (EOF reached unexpectedly).");
         } catch (ClassNotFoundException e) {
             System.out.println("Class not found during deserialization.");
             e.printStackTrace();
         } catch (IOException e) {
-            System.out.println("IOException occurred while reading Italian menu file.");
+            System.out.println("IOException while reading Korean menu file.");
             e.printStackTrace();
         }
 
         return menuList;
     }
 
+
+
     @Override
     public String toString() {
-        return String.format("%-25s ₹%7.2f   %s", foodName, price, description);
+        return "[ foodName=" + foodName + ", price=" + price + ", description=" + description + " ]";
     }
-
 }

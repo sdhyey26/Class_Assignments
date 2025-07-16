@@ -1,8 +1,8 @@
-package com.tss.model;
+package com.tss.model.DeliveryAgents;
 
 import java.io.Serializable;
 
-public class DeliveryAgents implements Serializable{
+public class DeliveryAgent implements Serializable{
 
 	private String name ;
 		
