@@ -12,6 +12,7 @@ public class DeliveryAgentManager {
     public void addAgents() {
         Scanner sc = new Scanner(System.in);
         ArrayList<DeliveryAgent> list = FileStorage.loadListFromFile(FILE, DeliveryAgent.class);
+        
         for (int i = 0; i < 2; i++) {
             DeliveryAgent agent = new DeliveryAgent();
             System.out.print("Enter agent name: ");

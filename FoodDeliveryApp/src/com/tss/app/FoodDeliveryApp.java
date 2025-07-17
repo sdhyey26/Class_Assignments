@@ -2,6 +2,7 @@ package com.tss.app;
 
 import com.tss.app.controller.AdminController;
 import com.tss.app.controller.CustomerController;
+import com.tss.exceptions.InvalidInputException;
 
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class FoodDeliveryApp {
         int c = sc.nextInt();
         if (c == 1) new AdminController(sc).start();
         else if (c == 2) new CustomerController(sc).start();
-        else System.out.println("Please enter a valid choice !!");
+        else throw new InvalidInputException();
 
         sc.close();
     }

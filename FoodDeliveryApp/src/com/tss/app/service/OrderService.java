@@ -1,5 +1,8 @@
 package com.tss.app.service;
 
+import com.tss.exceptions.InvalidInputException;
+import com.tss.exceptions.NoSuchMenuFound;
+import com.tss.exceptions.OrderListEmptyException;
 import com.tss.model.DeliveryAgents.DeliveryAgent;
 import com.tss.model.Menu.IMenu;
 import com.tss.model.Menu.IndianMenu;
@@ -14,37 +17,39 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OrderService {
-    private final AdminService adminService;
-    private final PaymentProceed payment = new PaymentProceed();
-    private final Customer customer = new Customer();
-    private final DeliveryAgent agent = new DeliveryAgent();
-    private final Admin admin = new Admin();
-    private final IndianMenu indianMenu = new IndianMenu();
-    public ArrayList<IMenu> orderList = new ArrayList<>();
-    public ItalianMenu italianMenu  = new ItalianMenu();
-    public KoreanMenu koreanMenu = new KoreanMenu();
-    
-    
-    public int total = 0;
+	private final AdminService adminService;
+	private final PaymentProceed payment = new PaymentProceed();
+	private final Customer customer = new Customer();
+	private final DeliveryAgent agent = new DeliveryAgent();
+	private final Admin admin = new Admin();
+	private final IndianMenu indianMenu = new IndianMenu();
+	public ArrayList<IMenu> orderList = new ArrayList<>();
+	public ItalianMenu italianMenu = new ItalianMenu();
+	public KoreanMenu koreanMenu = new KoreanMenu();
+	public ArrayList<DeliveryAgent> agents = admin.getDeliveryAgents();
+	public String agentName = "";
 
-    
-    public OrderService(AdminService adminService) {
-        this.adminService = adminService;
-    }
 
-    public void initCustomer(String name, String pass, String addr) {
-        customer.setName(name); customer.setPassword(pass); customer.setAddress(addr);
-    }
+	public int total = 0;
 
-    public void placeOrder(Scanner sc) {
-    	boolean isTrueForMenu = true;
+	public OrderService(AdminService adminService) {
+		this.adminService = adminService;
+	}
+
+	public void initCustomer(String name, String pass, String addr) {
+		customer.setName(name);
+		customer.setPassword(pass);
+		customer.setAddress(addr);
+	}
+
+	public void placeOrder(Scanner sc) {
+		boolean isTrueForMenu = true;
 		while (isTrueForMenu) {
 			System.out.println(" 1. Indian cuisine ");
 			System.out.println(" 2. Italian cuisine ");
 			System.out.println(" 3. korean cuisine ");
 			System.out.println(" 4. Exit ");
-			System.out.println(
-					"buy of ₹ 500 or above to get " + admin.getDiscountPercentage() + "% of discount!!");
+			System.out.println("buy of ₹ 500 or above to get " + admin.getDiscountPercentage() + "% of discount!!");
 			System.out.println("Enter your choice : ");
 			int getMenuChoice = sc.nextInt();
 
@@ -75,7 +80,7 @@ public class OrderService {
 									total += item.getPrice();
 									System.out.println(item.getFoodName() + " added to cart.");
 								} else {
-									System.out.println("Invalid id.");
+									throw new NoSuchMenuFound();
 								}
 							}
 						}
@@ -83,7 +88,7 @@ public class OrderService {
 						System.out.println("Exiting ordering !!");
 						break;
 					} else {
-						System.out.println("Invalid input.");
+						throw new InvalidInputException();
 					}
 				}
 				break;
@@ -114,7 +119,7 @@ public class OrderService {
 									total += item.getPrice();
 									System.out.println(item.getFoodName() + " added to cart.");
 								} else {
-									System.out.println("Invalid id.");
+									throw new NoSuchMenuFound();
 								}
 							}
 						}
@@ -122,7 +127,7 @@ public class OrderService {
 						System.out.println("Exiting Ordering !!");
 						break;
 					} else {
-						System.out.println("Invalid input.");
+						throw new InvalidInputException();
 					}
 				}
 				break;
@@ -153,7 +158,7 @@ public class OrderService {
 									total += item.getPrice();
 									System.out.println(item.getFoodName() + " added to cart.");
 								} else {
-									System.out.println("Invalid id.");
+									throw new NoSuchMenuFound();
 								}
 							}
 						}
@@ -161,7 +166,7 @@ public class OrderService {
 						System.out.println("Exiting ordering !!");
 						break;
 					} else {
-						System.out.println("Invalid input.");
+						throw new InvalidInputException();
 					}
 				}
 				break;
@@ -170,23 +175,39 @@ public class OrderService {
 				isTrueForMenu = false;
 				break;
 			}
+
+			default: {
+				throw new InvalidInputException();
+			}
 			}
 		}
-    }
+	}
 
-    public void displayCart() {
-    	orderList.forEach(item -> System.out.println(item.toString()));
-    }
+	public void displayCart() {
+		if(!orderList.isEmpty()) {
+			orderList.forEach(item -> System.out.println(item.toString()));
+		}
+		else {
+			throw new OrderListEmptyException();
+		}
+	}
 
-    public void checkout(Scanner sc) {
-        if (total > 500) total -= total * adminService.getDiscount() / 100;
-        displayCart();
-        System.out.println("Total: " + total);
-        System.out.println("1.UPI 2.CC");
-        int mode = sc.nextInt();
-
-        agent.setName((orderList.size() % 2 != 0) ? "Zomato" : "Swiggy");
-        payment.setPayment((mode==1)? PaymentMethods.UPI : PaymentMethods.CREDIT_CARD,
-                           customer.getName(), agent, total);
-    }
+	public void checkout(Scanner sc) {
+		if (total > 500)
+			total -= total * adminService.getDiscount() / 100;
+		displayCart();
+		System.out.println("Total: " + total);
+		System.out.println("1.UPI 2.CC");
+		int mode = sc.nextInt();
+		
+		if(orderList.size() % 2 == 0) {
+			agentName = agents.get(0).getName();
+		}
+		else {
+			agentName = agents.get(1).getName();
+		}
+		
+		payment.setPayment((mode == 1) ? PaymentMethods.UPI : PaymentMethods.CREDIT_CARD, customer.getName(), agentName , 
+				total);
+	}
 }

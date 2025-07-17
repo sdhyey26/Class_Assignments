@@ -5,6 +5,7 @@ import com.tss.model.Menu.IMenu;
 import com.tss.model.Menu.IndianMenu;
 import com.tss.model.Menu.ItalianMenu;
 import com.tss.model.Menu.KoreanMenu;
+import com.tss.exceptions.InvalidInputException;
 import com.tss.model.DeliveryAgents.*;
 import com.tss.model.admin.menu.*;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class AdminService {
 						} else if (doneContinue == 2) {
 							break;
 						} else {
-							System.out.println("Invalid input !!");
+							throw new InvalidInputException();
 						}
 					}
 					break;
@@ -80,7 +81,7 @@ public class AdminService {
 						} else if (doneContinue == 2) {
 							break;
 						} else {
-							System.out.println("Invalid input !!");
+							throw new InvalidInputException();
 						}
 					}
 					break;
@@ -102,7 +103,7 @@ public class AdminService {
 						} else if (doneContinue == 2) {
 							break;
 						} else {
-							System.out.println("Invalid input !!");
+							throw new InvalidInputException();
 						}
 					}
 					break;
@@ -113,7 +114,7 @@ public class AdminService {
 					break;
 				}
 				default:
-					System.out.println("Invalid menu choice.");
+					throw new InvalidInputException();
 				}
 			}
 		}
