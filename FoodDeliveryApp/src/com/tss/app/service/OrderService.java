@@ -28,6 +28,8 @@ public class OrderService {
 	public KoreanMenu koreanMenu = new KoreanMenu();
 	public ArrayList<DeliveryAgent> agents = admin.getDeliveryAgents();
 	public String agentName = "";
+	public Customer customerInfo = new Customer();
+	public ArrayList<Customer> alreadyExist = customerInfo.getCustomer();
 
 
 	public int total = 0;
@@ -36,10 +38,81 @@ public class OrderService {
 		this.adminService = adminService;
 	}
 
-	public void initCustomer(String name, String pass, String addr) {
-		customer.setName(name);
-		customer.setPassword(pass);
-		customer.setAddress(addr);
+	public void initCustomer(String name, String pass, String addr , Scanner sc) {
+		
+		System.out.println("1.Already a user / 2.New User");
+		int customerAuth = sc.nextInt();
+		
+		if(customerAuth == 1) {
+			boolean isFound = false;
+			
+			for(Customer customer : alreadyExist) {
+				if(name.equals(customer.getName()) && pass.equals(customer.getPassword())) {
+					isFound = true;
+				}
+			}
+			
+			if(isFound) {
+				customer.setName(name);
+				customer.setAddress(addr);
+				System.out.println("Welcome " + customer.getName() + " happy ordering!!");
+			}
+			else {
+				System.out.println("Invalid credentials !!");
+				System.out.println("Want to Register account : 1.yes 2.No");
+				int choiceForRegistration = sc.nextInt();
+				
+				if(choiceForRegistration == 1) {
+					customer.setName(name);
+					customer.setPassword(pass);
+					customer.setAddress(addr);
+					
+					customer.setCustomer(customer);
+					
+					System.out.println("Account Created " + customer.getName());
+				}
+				else if(choiceForRegistration == 2) {
+					System.out.println("Exiting the software thanks for visiting !!");
+					System.exit(0);
+				}
+				else {
+					throw new InvalidInputException();
+				}
+			}
+		}
+		else if(customerAuth == 2) {
+			
+			boolean isFound = false;
+
+			for(Customer customer : alreadyExist) {
+				if(name.equals(customer.getName()) ) {
+					isFound = true;
+				}
+			}
+			if(isFound) {
+				System.out.println("Already account with this name exists please login");
+				
+				
+				
+			}
+			else {
+				customer.setName(name);
+				customer.setPassword(pass);
+				customer.setAddress(addr);
+				
+				customer.setCustomer(customer);
+				
+				System.out.println("Account Created " + customer.getName());
+			}
+		}
+		else {
+			throw new InvalidInputException();
+		}
+		
+	}
+	
+	public ArrayList<Customer> getCustomer() {
+		return customer.getCustomer();
 	}
 
 	public void placeOrder(Scanner sc) {
@@ -207,7 +280,7 @@ public class OrderService {
 			agentName = agents.get(1).getName();
 		}
 		
-		payment.setPayment((mode == 1) ? PaymentMethods.UPI : PaymentMethods.CREDIT_CARD, customer.getName(), agentName , 
+		payment.setPayment((mode == 1) ? PaymentMethods.UPI : PaymentMethods.CREDIT_CARD, customer.getName(), customer.getAddress(), agentName , 
 				total);
 	}
 }

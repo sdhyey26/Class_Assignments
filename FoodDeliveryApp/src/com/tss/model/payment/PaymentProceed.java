@@ -3,6 +3,7 @@ package com.tss.model.payment;
 import java.util.Scanner;
 import java.util.regex.*;
 
+import com.tss.exceptions.InvalidInputException;
 import com.tss.model.DeliveryAgents.DeliveryAgent;
 
 public class PaymentProceed {
@@ -46,7 +47,7 @@ public class PaymentProceed {
 		this.cvv = cvv;
 	}
 
-	public void setPayment(PaymentMethods method, String name, String agentName, int total) {
+	public void setPayment(PaymentMethods method, String name, String Address, String agentName, int total ) {
 		if (method == PaymentMethods.UPI) {
 			System.out.print("Enter UPI ID: ");
 			String upiId = sc.next();
@@ -66,8 +67,9 @@ public class PaymentProceed {
 			setUpi_password(upiPwd);
 
 			System.out.println("Payment of ₹" + total + " successful via UPI ID: " + getUpi_id());
-			System.out.println("Your order will be delivered soon by: " + agentName);
+			System.out.println("Your order will be delivered soon by: " + agentName + " to " + Address);
 			System.out.println("Thanks for shopping, " + name + "!");
+			System.exit(0);
 		} else if (method == PaymentMethods.CREDIT_CARD) {
 			System.out.print("Enter Credit Card Number (16 digits): ");
 			String cardNumber = sc.next();
@@ -91,10 +93,11 @@ public class PaymentProceed {
 			setCvv(cvvInput);
 
 			System.out.println("Payment of ₹" + total + " successful via Credit Card ending with: " + getCredit_card().substring(12));
-			System.out.println("Your order will be delivered soon by: " + agentName);
+			System.out.println("Your order will be delivered soon by: " + agentName + " to " + Address);
 			System.out.println("Thanks for shopping, " + name + "!");
+			System.exit(0);
 		} else {
-			System.out.println("Payment failed: Invalid payment method selected.");
+			throw new InvalidInputException();
 		}
 	}
 }

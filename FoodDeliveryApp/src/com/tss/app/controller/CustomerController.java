@@ -22,8 +22,8 @@ public class CustomerController {
         String name = sc.nextLine();
         String pass = sc.nextLine();
         String addr = sc.nextLine();
-
-        orderService.initCustomer(name, pass, addr);
+        
+        orderService.initCustomer(name, pass, addr , sc);
 
         boolean cont = true;
         while (cont) {
