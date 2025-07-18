@@ -11,8 +11,16 @@ public class ItalianMenuManager {
 
     public void addMenuItem(String name, double price, String description) {
          ArrayList<ItalianMenu> list = FileStorage.loadListFromFile(FILE, ItalianMenu.class);
+         
+         boolean found = false;
+         
+         for(ItalianMenu item : list) {
+         	if(name.equals(item.getFoodName())) {
+         		found = true;
+         	}
+         }
 
-        if(!list.contains(name)) {
+        if(!found) {
         	ItalianMenu menu = new ItalianMenu();
             menu.setFoodName(name);
             menu.setPrice(price);

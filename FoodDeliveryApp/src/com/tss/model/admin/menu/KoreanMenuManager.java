@@ -7,25 +7,30 @@ import com.tss.model.Menu.*;
 import com.tss.model.admin.storage.FileStorage;
 
 public class KoreanMenuManager {
-    private static final String FILE = "KoreanMenuList.ser";
+	private static final String FILE = "KoreanMenuList.ser";
 
-    public void addMenuItem(String name, double price, String description) {	
-        ArrayList<KoreanMenu> list = FileStorage.loadListFromFile(FILE, KoreanMenu.class);
-        
-        if(!list.contains(name)) {
-        	KoreanMenu menu = new KoreanMenu();
-            menu.setFoodName(name);
-            menu.setPrice(price);
-            menu.setDescription(description);
-            list.add(menu);
-            FileStorage.saveListToFile(list, FILE);
-            System.out.println("korean Menu updated successfully!");
-        }
-        else {
-        	throw new DuplicateItemException();
-        }
-        
-    }
-    
-    
+	public void addMenuItem(String name, double price, String description) {
+		ArrayList<KoreanMenu> list = FileStorage.loadListFromFile(FILE, KoreanMenu.class);
+		boolean found = false;
+
+		for (KoreanMenu item : list) {
+			if (name.equals(item.getFoodName())) {
+				found = true;
+			}
+		}
+
+		if (!found) {
+			KoreanMenu menu = new KoreanMenu();
+			menu.setFoodName(name);
+			menu.setPrice(price);
+			menu.setDescription(description);
+			list.add(menu);
+			FileStorage.saveListToFile(list, FILE);
+			System.out.println("korean Menu updated successfully!");
+		} else {
+			throw new DuplicateItemException();
+		}
+
+	}
+
 }

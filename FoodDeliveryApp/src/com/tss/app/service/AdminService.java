@@ -15,9 +15,12 @@ public class AdminService {
 	public static IndianMenu indianMenu = new IndianMenu();
 	public static ItalianMenu italianMenu = new ItalianMenu();
 	public static KoreanMenu koreanMenu = new KoreanMenu();
+
 	
 	
-    private final Admin admin = new Admin();
+    private static final Admin admin = new Admin();
+    public static ArrayList<DeliveryAgent> list = admin.getDeliveryAgents();
+
 
     public boolean authenticate(String name, String pass) {
         return name.equals(admin.getName()) && pass.equals(admin.getPassword());
@@ -148,8 +151,8 @@ public class AdminService {
     }
 
     public void manageAgents(Scanner sc) {
+    	list.forEach(System.out::println);
         admin.addDeliveryAgents();
-        ArrayList<DeliveryAgent> list = admin.getDeliveryAgents();
         list.forEach(System.out::println);
     }
 
