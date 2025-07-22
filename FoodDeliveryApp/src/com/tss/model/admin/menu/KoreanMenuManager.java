@@ -8,9 +8,10 @@ import com.tss.model.admin.storage.FileStorage;
 
 public class KoreanMenuManager {
 	private static final String FILE = "KoreanMenuList.ser";
+	public static ArrayList<KoreanMenu> list = FileStorage.loadListFromFile(FILE, KoreanMenu.class);
+
 
 	public void addMenuItem(String name, double price, String description) {
-		ArrayList<KoreanMenu> list = FileStorage.loadListFromFile(FILE, KoreanMenu.class);
 		boolean found = false;
 
 		for (KoreanMenu item : list) {

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class IndianMenuManager {
     private static final String FILE = "IndianMenuList.ser";
-
+    public static ArrayList<IndianMenu> list = FileStorage.loadListFromFile(FILE, IndianMenu.class);
+    
     public void addMenuItem(String name, double price, String description) {
-        ArrayList<IndianMenu> list = FileStorage.loadListFromFile(FILE, IndianMenu.class);
         boolean found = false;
         
         for(IndianMenu item : list) {
@@ -27,6 +27,10 @@ public class IndianMenuManager {
             list.add(menu);
             FileStorage.saveListToFile(list, FILE);
             System.out.println("Indian Menu updated successfully!");
+            
+            for(IndianMenu indianMenu : list) {
+            	System.out.println(indianMenu.toString());
+            }
         }
         else {
         	throw new DuplicateItemException();
