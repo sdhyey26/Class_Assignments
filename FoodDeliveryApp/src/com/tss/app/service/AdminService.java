@@ -62,6 +62,7 @@ public class AdminService {
 							if (indianMenuChoice == 1) {
 								System.out.print("Enter food name: ");
 								String foodName = sc.nextLine();
+								sc.nextLine();
 								System.out.print("Enter food price: ");
 								double foodPrice = sc.nextDouble();
 								sc.nextLine();
@@ -126,6 +127,8 @@ public class AdminService {
 							if (italianMenuChoice == 1) {
 								System.out.print("Enter food name: ");
 								String foodName = sc.nextLine();
+								sc.nextLine();
+
 								System.out.print("Enter food price: ");
 								double foodPrice = sc.nextDouble();
 								sc.nextLine();
@@ -184,6 +187,7 @@ public class AdminService {
 							if(KoreanMenuChoice == 1) {
 								System.out.print("Enter food name: ");
 								String foodName = sc.nextLine();
+								sc.nextLine();
 								System.out.print("Enter food price: ");
 								double foodPrice = sc.nextDouble();
 								sc.nextLine();

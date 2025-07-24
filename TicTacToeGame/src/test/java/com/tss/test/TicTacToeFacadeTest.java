@@ -29,31 +29,31 @@ class TicTacToeFacadeTest {
 
     @Test
     public void testHorizontalWin() {
-        game.makeMove(0, 0); // X
-        game.makeMove(1, 0); // O
-        game.makeMove(0, 1); // X
-        game.makeMove(1, 1); // O
-        game.makeMove(0, 2); // X
+        game.makeMove(0, 0); 
+        game.makeMove(1, 0); 
+        game.makeMove(0, 1); 
+        game.makeMove(1, 1); 
+        game.makeMove(0, 2); 
         assertEquals("X wins!", game.checkGameStatus());
     }
 
     @Test
     public void testVerticalWin() {
-        game.makeMove(0, 0); // X
-        game.makeMove(0, 1); // O
-        game.makeMove(1, 0); // X
-        game.makeMove(1, 1); // O
-        game.makeMove(2, 0); // X
+        game.makeMove(0, 0); 
+        game.makeMove(0, 1); 
+        game.makeMove(1, 0); 
+        game.makeMove(1, 1); 
+        game.makeMove(2, 0); 
         assertEquals("X wins!", game.checkGameStatus());
     }
 
     @Test
     public void testDiagonalWin() {
-        game.makeMove(0, 0); // X
-        game.makeMove(0, 1); // O
-        game.makeMove(1, 1); // X
-        game.makeMove(0, 2); // O
-        game.makeMove(2, 2); // X
+        game.makeMove(0, 0); 
+        game.makeMove(0, 1); 
+        game.makeMove(1, 1); 
+        game.makeMove(0, 2); 
+        game.makeMove(2, 2); 
         assertEquals("X wins!", game.checkGameStatus());
     }
 
