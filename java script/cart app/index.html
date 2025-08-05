@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart UI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <label for="product">Select Product</label>
+    <select id="product" onchange="updatePriceDisplay()">
+      <option value="biscuit" data-price="10">Biscuit</option>
+      <option value="chocolate" data-price="20">Chocolate</option>
+      <option value="chips" data-price="15">Chips</option>
+    </select>
+
+    <div id="price-display">Price: ₹<span id="price-value">10</span></div>
+
+    <label for="quantity">Quantity</label>
+    <select id="quantity">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+    </select>
+
+    <div style="text-align: center;">
+    <button onclick="addToCart()">Add To Cart</button>
+</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="cart-body"></tbody>
+    </table>
+
+    <div class="grand-total" style="text-align: center;">Grand Total: ₹<span id="grand-total" >0</span></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

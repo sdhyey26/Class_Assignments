@@ -1,0 +1,114 @@
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f4f7f9; 
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 30px auto;
+  background: linear-gradient(45deg, #43cea2, #185a9d);
+;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #555;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  appearance: none; 
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 15px top 50%;
+  background-size: 0.65em auto;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+#price-display {
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 22px;
+  color: #ffffff; 
+}
+
+button {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 25px;
+  border: none;
+  border-radius: 6px;
+  background-color: #00ff4c; 
+  color: #ffffff;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+button:hover {
+  background-color: #4d4343; 
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+    background: linear-gradient(45deg, #43cea2, #185a9d);
+
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0; 
+}
+
+th {
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+    color: #ffffff;
+
+}
+
+.grand-total {
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px solid #333;
+  color: #ffffff;
+}
