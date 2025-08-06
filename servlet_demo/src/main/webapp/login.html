@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h2>Registration</h2>
+
+    <form action="loginController" method="get">
+
+        <label for="nameTxt">Name:</label><br>
+        <input type="text" id="nameTxt" name="nameTxt"><br><br>
+
+        <label for="addressTxt">Address:</label><br>
+        <textarea id="addressTxt" name="addressTxt" rows="3" cols="30"></textarea><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female<br><br>
+
+        <label for="city">City:</label><br>
+        <select name="city" id="city">
+            <option value="">Select City</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Pune">Pune</option>
+            <option value="Bangalore">Bangalore</option>
+        </select><br><br>
+
+        <label>Languages Known:</label><br>
+        <input type="checkbox" name="languages" value="Marathi"> Marathi<br>
+        <input type="checkbox" name="languages" value="Hindi"> Hindi<br>
+        <input type="checkbox" name="languages" value="Gujarati"> Gujarati<br>
+        <input type="checkbox" name="languages" value="English"> English<br><br>
+
+        <label for="usernameTxt">Username:</label><br>
+        <input type="text" id="usernameTxt" name="usernameTxt"><br><br>
+
+        <label for="passwordTxt">Password:</label><br>
+        <input type="password" id="passwordTxt" name="passwordTxt"><br><br>
+
+        <label for="confirmPwdTxt">Confirm Password:</label><br>
+        <input type="password" id="confirmPwdTxt" name="confirmPwdTxt"><br><br>
+
+        <input type="submit" value="Register">
+    </form>
+
+</form>
+</body>
+</html>
