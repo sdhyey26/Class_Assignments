@@ -15,10 +15,8 @@ public class Database {
 
 	public Database() {
 		try {
-			// registration driver
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			// Establishing conncection
 			try {
 				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tss_students", "root",
 						"Dhyey1212");
@@ -50,7 +48,6 @@ public class Database {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

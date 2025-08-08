@@ -2,7 +2,6 @@ package com.tss.model;
 
 public class CustomerModel {
 	
-	
 	private String name;
 	private int age;
 	private int income ;
@@ -37,6 +36,4 @@ public class CustomerModel {
 		return "CustomerModel [name=" + name + ", age=" + age + ", income=" + income + ", creditScore=" + creditScore
 				+ "]";
 	}
-	
-	
 }

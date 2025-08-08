@@ -3,7 +3,7 @@ package com.tss.mytasks;
 public class NewThread implements Runnable {
 	
 	 String name;
-	    Thread t;
+     Thread t;
 
 	    NewThread(String threadname) {
 	        name = threadname;
@@ -25,5 +25,4 @@ public class NewThread implements Runnable {
         }
         System.out.println(name + " exiting.");
 	}
-
 }

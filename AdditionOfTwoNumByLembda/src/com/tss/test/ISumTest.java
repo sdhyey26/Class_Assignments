@@ -16,14 +16,11 @@ public class ISumTest {
 			System.out.println("enter a : ");
 			int a = sc.nextInt();
 			
-			System.out.println("enter b : ");
+			System.out.println("enter b : "); 
 			int b = sc.nextInt();
 			return a+b;
 		};
 		
 		System.out.println("the sum of the given numbers : " + isum.sum()) ;
 	}
-	
-	
-
 }

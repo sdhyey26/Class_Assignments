@@ -8,6 +8,7 @@ public class CalculateFactorial {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("enter the num : ");
 		int num = sc.nextInt();
+		
 		Consumer<Integer> factorial = (number)->{
 			int fact = 1;
 			for(int i = 1 ; i <= number ; i++) {

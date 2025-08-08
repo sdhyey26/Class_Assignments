@@ -34,10 +34,8 @@ public class secondController extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
 
-		// Get last name from form
 		String lastName = request.getParameter("lastNameTxt");
 
-		// Retrieve session and get first name
 		HttpSession session = request.getSession(false);
 		String firstName = null;
 

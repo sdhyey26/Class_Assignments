@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Question</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="quiz-container">
+    <h2>Quiz Question</h2>
+    <form action="SubmitAnswerServlet" method="post">
+        <div id="question-box">
+            <script>
+                async function loadQuestion() {
+                    const response = await fetch("SessionQuestionServlet"); 
+                    const data = await response.json();
+
+                    document.getElementById("question-box").innerHTML = `
+                        <p><strong>Q:</strong> ${data.questionText}</p>
+                        <label><input type="radio" name="option" value="A" required> ${data.optionA}</label><br>
+                        <label><input type="radio" name="option" value="B"> ${data.optionB}</label><br>
+                        <label><input type="radio" name="option" value="C"> ${data.optionC}</label><br>
+                        <label><input type="radio" name="option" value="D"> ${data.optionD}</label><br><br>
+                        <button type="submit">Next</button>
+                    `;
+                }
+                loadQuestion();
+            </script>
+        </div>
+    </form>
+</div>
+</body>
+</html>

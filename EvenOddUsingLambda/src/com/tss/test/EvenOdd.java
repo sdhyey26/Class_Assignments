@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 public class EvenOdd {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		Predicate<Integer > bi = (a )->{
+		Predicate<Integer> bi = (a )->{
 			if(a % 2 == 0 ) {
 				return true;
 			}

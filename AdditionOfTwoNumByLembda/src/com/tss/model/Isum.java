@@ -4,5 +4,5 @@ import java.util.Scanner;
 
 @FunctionalInterface
 public interface Isum {
-	public int sum( );
+	public int sum();
 }

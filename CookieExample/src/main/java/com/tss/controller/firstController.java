@@ -25,7 +25,7 @@ public class firstController extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
-		String  firstName = request.getParameter("firstName");
+		String firstName = request.getParameter("firstName");
 		
 		Cookie cookie1 = new Cookie("firstName" , firstName);
 		response.addCookie(cookie1);
