@@ -11,7 +11,4 @@ public class MyTask2 implements Callable<Integer>{
 		Random random = new Random();
 		return random.nextInt();
 	}
-
-
-
 }

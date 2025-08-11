@@ -14,6 +14,7 @@ import java.util.*;
 
 @WebServlet("/SubmitQuizServlet")
 public class SubmitQuizServlet extends HttpServlet {
+	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
