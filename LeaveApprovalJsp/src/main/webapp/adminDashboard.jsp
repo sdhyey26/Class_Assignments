@@ -1,169 +1,226 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.tss.model.User, com.tss.model.LeaveRequest, com.tss.service.LeaveService"%>
 <%@ page import="java.util.List, java.time.LocalDate, java.time.temporal.ChronoUnit"%>
-<%
-	User user = (User) session.getAttribute("user");
-	if (user == null || !"ADMIN".equals(user.getRole())) {
-		response.sendRedirect("login.jsp");
-		return;
-	}
 
-	LeaveService service = new LeaveService();
-	List<LeaveRequest> requests = service.getAllRequests();
+<%
+    User user = (User) session.getAttribute("user");
+    if (user == null || !"ADMIN".equals(user.getRole())) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    String statusFilter = request.getParameter("statusFilter");
+    String dateFilter = request.getParameter("dateFilter");
+
+    LeaveService service = new LeaveService();
+    List<LeaveRequest> requests = service.getAllRequests();
+
+    if (statusFilter != null && !statusFilter.isEmpty()) {
+        requests.removeIf(r -> !statusFilter.equalsIgnoreCase(r.getStatus()));
+    }
+    if (dateFilter != null && !dateFilter.isEmpty()) {
+        requests.removeIf(r -> !r.getStartDate().toString().equals(dateFilter));
+    }
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Admin Dashboard</title>
-<style>
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-	body {
-		font-family: 'Poppins', sans-serif;
-		background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-		color: #fff;
-		margin: 0;
-		padding: 40px;
-	}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            padding: 40px;
+        }
 
-	h2 {
-		font-size: 28px;
-		background: linear-gradient(45deg, #ff00cc, #3333ff);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		text-align: center;
-		margin-bottom: 10px;
-	}
+        h2, h3 {
+            text-align: center;
+        }
 
-	h3 {
-		text-align: center;
-		color: #ccc;
-		margin-bottom: 30px;
-	}
+        form.filter-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		background-color: rgba(0, 0, 0, 0.7);
-		box-shadow: 0 0 10px rgba(255, 0, 200, 0.2);
-		border-radius: 10px;
-		overflow: hidden;
-	}
+        select, input[type="date"] {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            margin: 0 10px;
+            font-family: 'Poppins';
+        }
 
-	th, td {
-		padding: 14px 16px;
-		text-align: center;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-		color: #f1f1f1;
-	}
+        button.filter-btn {
+            padding: 8px 14px;
+            border: none;
+            background: #00e676;
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-	th {
-		background: linear-gradient(45deg, #ff00cc, #3333ff);
-		color: white;
-	}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
 
-	tr:nth-child(even) {
-		background-color: rgba(255, 255, 255, 0.05);
-	}
+        th, td {
+            padding: 14px 16px;
+            text-align: center;
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
 
-	form {
-		margin: 0;
-	}
+        th {
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+        }
 
-	button {
-		padding: 10px 16px;
-		border: none;
-		border-radius: 6px;
-		cursor: pointer;
-		color: #fff;
-		font-weight: bold;
-		transition: all 0.3s ease;
-		font-size: 14px;
-		transform: scale(1);
-	}
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
 
-	button[value="approve"] {
-		background: linear-gradient(135deg, #00e676, #1de9b6);
-		box-shadow: 0 4px 10px rgba(0, 230, 118, 0.3);
-	}
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-	button[value="reject"] {
-		background: linear-gradient(135deg, #ff1744, #ff616f);
-		box-shadow: 0 4px 10px rgba(255, 23, 68, 0.3);
-	}
+        button[value="approve"] {
+            background: linear-gradient(135deg, #00e676, #1de9b6);
+            color: black;
+        }
 
-	button:hover {
-		transform: scale(1.05);
-		box-shadow: 0 6px 20px rgba(255, 0, 204, 0.4);
-	}
+        .reject-btn {
+            background: linear-gradient(135deg, #ff1744, #ff616f);
+        }
 
-	a {
-		display: inline-block;
-		margin-top: 30px;
-		text-align: center;
-		color: white;
-		text-decoration: none;
-		font-weight: bold;
-		padding: 10px 20px;
-		background: linear-gradient(45deg, #ff00cc, #3333ff);
-		border-radius: 8px;
-		transition: 0.3s ease;
-	}
+        .confirm-reject {
+            background: linear-gradient(135deg, #c51162, #f50057);
+            margin-top: 6px;
+        }
 
-	a:hover {
-		box-shadow: 0 0 10px #ff00cc;
-	}
-</style>
+        textarea {
+            width: 90%;
+            margin-top: 10px;
+            border-radius: 6px;
+            padding: 6px;
+            font-family: 'Poppins';
+            resize: vertical;
+        }
+
+        .reject-section {
+            display: none;
+            margin-top: 8px;
+        }
+
+        .logout {
+            display: block;
+            margin: 30px auto;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            text-decoration: none;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
-	<h2>Welcome, Admin</h2>
-	<h3>Pending Leave Requests</h3>
+    <h2>Welcome, Admin</h2>
+    <h3>Leave Requests</h3>
 
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>User ID</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-			<th>Reason</th>
-			<th>Days</th>
-			<th>Status</th>
-			<th>Actions</th>
-		</tr>
-		<%
-		for (LeaveRequest r : requests) {
-			if (!"PENDING".equals(r.getStatus())) continue;
+    <!-- Filter Form -->
+    <form method="get" class="filter-form">
+        <label>Status:
+            <select name="statusFilter">
+                <option value="">All</option>
+                <option value="PENDING" <%= "PENDING".equals(statusFilter) ? "selected" : "" %>>Pending</option>
+                <option value="APPROVED" <%= "APPROVED".equals(statusFilter) ? "selected" : "" %>>Approved</option>
+                <option value="REJECTED" <%= "REJECTED".equals(statusFilter) ? "selected" : "" %>>Rejected</option>
+            </select>
+        </label>
 
-			LocalDate start = LocalDate.parse(r.getStartDate().toString());
-			LocalDate end = LocalDate.parse(r.getEndDate().toString());
-			long daysBetween = ChronoUnit.DAYS.between(start, end) + 1;
-		%>
-		<form method="post" action="AdminServlet">
-			<tr>
-				<td><%= r.getId() %></td>
-				<td><%= r.getUserId() %></td>
-				<td><%= r.getStartDate() %></td>
-				<td><%= r.getEndDate() %></td>
-				<td><%= r.getReason() %></td>
-				<td><%= daysBetween %></td>
-				<td><%= r.getStatus() %></td>
-				<td>
-					<input type="hidden" name="request_id" value="<%= r.getId() %>" />
-					<input type="hidden" name="user_id" value="<%= r.getUserId() %>" />
-					<input type="hidden" name="days" value="<%= daysBetween %>" />
-					<button type="submit" name="action" value="approve">Approve</button>
-					&nbsp;
-					<button type="submit" name="action" value="reject">Reject</button>
-				</td>
-			</tr>
-		</form>
-		<% } %>
-	</table>
+        <label>Date:
+            <input type="date" name="dateFilter" value="<%= dateFilter != null ? dateFilter : "" %>">
+        </label>
 
-	<div style="text-align: center;">
-		<a href="login.jsp">Logout</a>
-	</div>
+        <button type="submit" class="filter-btn">Apply Filters</button>
+    </form>
+
+    <!-- Table -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Reason</th>
+            <th>Days</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+
+        <% for (LeaveRequest r : requests) {
+            LocalDate start = LocalDate.parse(r.getStartDate().toString());
+            LocalDate end = LocalDate.parse(r.getEndDate().toString());
+            long days = ChronoUnit.DAYS.between(start, end) + 1;
+        %>
+        <tr>
+            <td><%= r.getId() %></td>
+            <td><%= r.getUserId() %></td>
+            <td><%= r.getStartDate() %></td>
+            <td><%= r.getEndDate() %></td>
+            <td><%= r.getReason() %></td>
+            <td><%= days %></td>
+            <td><%= r.getStatus() %></td>
+<td>
+                <% if ("PENDING".equals(r.getStatus())) { %>
+                <form method="post" action="AdminServlet">
+                    <input type="hidden" name="request_id" value="<%= r.getId() %>" />
+                    <input type="hidden" name="user_id" value="<%= r.getUserId() %>" />
+                    <input type="hidden" name="days" value="<%= days %>" />
+
+                    <button type="submit" name="action" value="approve" formnovalidate>Approve</button>
+                    <button type="button" class="reject-btn" onclick="showRejection(this)">Reject</button>
+
+                    <div class="reject-section">
+                        <textarea name="rejection_reason" placeholder="Enter rejection reason" required></textarea>
+                        <button type="submit" name="action" value="reject" class="confirm-reject">Confirm Reject</button>
+                    </div>
+                </form>
+                <% } else { %>
+                    N/A
+                <% } %>
+            </td>
+        </tr>
+        <% } %>
+    </table>
+
+    <a href="login.jsp" class="logout">Logout</a>
+
+    <script>
+        function showRejection(button) {
+            const td = button.closest("td");
+            const section = td.querySelector(".reject-section");
+            button.style.display = "none";
+            section.style.display = "block";
+
+            const approveBtn = td.querySelector('button[value="approve"]');
+            if (approveBtn) {
+                approveBtn.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>

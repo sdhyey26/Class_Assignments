@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.tss.model.User, com.tss.model.LeaveRequest, com.tss.service.LeaveService" %>
 <%@ page import="java.util.List" %>
 <%
@@ -9,8 +8,18 @@
         return;
     }
 
+    String statusFilter = request.getParameter("status");
+    String startDate = request.getParameter("startDate");
+    String endDate = request.getParameter("endDate");
+
     LeaveService service = new LeaveService();
-    List<LeaveRequest> requests = service.getAllRequests();
+    List<LeaveRequest> requests;
+
+    if (statusFilter != null || startDate != null || endDate != null) {
+        requests = service.getFilteredRequests(statusFilter, startDate, endDate);
+    } else {
+        requests = service.getAllRequests();
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +28,6 @@
 <title>Employee Dashboard</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
     body {
         font-family: 'Poppins', sans-serif;
         background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
@@ -30,7 +38,6 @@
         flex-direction: column;
         align-items: center;
     }
-
     .dashboard {
         background-color: rgba(0, 0, 0, 0.85);
         padding: 40px;
@@ -40,7 +47,6 @@
         width: 400px;
         margin-bottom: 30px;
     }
-
     h2 {
         font-size: 26px;
         background: linear-gradient(45deg, #ff00cc, #3333ff);
@@ -48,14 +54,7 @@
         -webkit-text-fill-color: transparent;
         margin-bottom: 15px;
     }
-
-    p {
-        font-size: 18px;
-        color: #ccc;
-        margin-bottom: 30px;
-    }
-
-    a {
+    a, input[type="submit"] {
         display: block;
         padding: 12px;
         margin: 10px 0;
@@ -70,13 +69,11 @@
         color: white;
         transition: 0.3s ease;
     }
-
-    a:hover {
+    a:hover, input[type="submit"]:hover {
         box-shadow: 0 0 15px #ff00cc;
     }
-
     table {
-        width: 85%;
+        width: 90%;
         border-collapse: collapse;
         background-color: rgba(0, 0, 0, 0.7);
         border-radius: 12px;
@@ -84,25 +81,38 @@
         overflow: hidden;
         margin-top: 20px;
     }
-
     th, td {
         padding: 14px 16px;
         text-align: center;
         color: #f1f1f1;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-
     th {
         background: linear-gradient(45deg, #ff00cc, #3333ff);
         color: white;
     }
-
     tr:nth-child(even) {
         background-color: rgba(255, 255, 255, 0.05);
     }
-
     tr:hover {
         background-color: rgba(255, 255, 255, 0.08);
+    }
+    .filter-form {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .filter-form label {
+        font-weight: bold;
+    }
+    .filter-form input, .filter-form select {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: none;
+        outline: none;
+        font-size: 14px;
     }
 </style>
 </head>
@@ -115,6 +125,25 @@
     </div>
 
     <h2>My Leave Requests</h2>
+
+    <form class="filter-form" method="get">
+        <label>Status:
+            <select name="status">
+                <option value="">All</option>
+                <option value="PENDING" <%= "PENDING".equals(statusFilter) ? "selected" : "" %>>PENDING</option>
+                <option value="APPROVED" <%= "APPROVED".equals(statusFilter) ? "selected" : "" %>>APPROVED</option>
+                <option value="REJECTED" <%= "REJECTED".equals(statusFilter) ? "selected" : "" %>>REJECTED</option>
+            </select>
+        </label>
+        <label>From:
+            <input type="date" name="startDate" value="<%= startDate != null ? startDate : "" %>">
+        </label>
+        <label>To:
+            <input type="date" name="endDate" value="<%= endDate != null ? endDate : "" %>">
+        </label>
+        <input type="submit" value="Filter">
+    </form>
+
     <table>
         <tr>
             <th>ID</th>
@@ -122,6 +151,7 @@
             <th>End Date</th>
             <th>Reason</th>
             <th>Status</th>
+            <th>Rejection Reason</th>
         </tr>
         <%
             for (LeaveRequest r : requests) {
@@ -133,6 +163,7 @@
             <td><%= r.getEndDate() %></td>
             <td><%= r.getReason() %></td>
             <td><%= r.getStatus() %></td>
+            <td><%= "REJECTED".equals(r.getStatus()) ? r.getRejectionReason() : "-" %></td>
         </tr>
         <% } %>
     </table>

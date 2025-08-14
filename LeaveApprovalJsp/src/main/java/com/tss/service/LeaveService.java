@@ -1,5 +1,6 @@
 package com.tss.service;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -18,18 +19,37 @@ public class LeaveService {
         return dao.getAllRequests();
     }
 
-    public void approveLeave(int requestId, int userId ) throws Exception {
-        LeaveRequest request = dao.getLeaveRequestById(requestId);
-
-        LocalDate start = request.getStartDate().toLocalDate();
-        LocalDate end = request.getEndDate().toLocalDate();
-        long days = ChronoUnit.DAYS.between(start, end) + 1;
-
-        dao.updateLeaveStatus(requestId, "APPROVED");
-        dao.updateLeaveBalance(userId, (int) days);  
+    public List<LeaveRequest> getFilteredRequests(String status, String from, String to) throws Exception {
+        return dao.getFilteredRequests(status, from, to);
     }
 
-    public void rejectLeave(int id) throws Exception {
-        dao.updateLeaveStatus(id, "REJECTED");
+    public void approveLeave(int requestId, int userId) throws Exception {
+        LeaveRequest request = dao.getLeaveRequestById(requestId);
+        if (request != null) {
+            LocalDate start = request.getStartDate().toLocalDate();
+            LocalDate end = request.getEndDate().toLocalDate();
+            long days = ChronoUnit.DAYS.between(start, end) + 1;
+
+            dao.updateLeaveStatus(requestId, "APPROVED");
+            dao.updateLeaveBalance(userId, (int) days);
+        }
+    }
+
+    public void rejectLeave(int requestId, String reason) throws Exception {
+        dao.rejectLeaveWithReason(requestId, reason); // updates both status and reason
+    }
+
+    public boolean canApplyForLeave(int userId) throws Exception {
+        LocalDate now = LocalDate.now();
+        int currentMonth = now.getMonthValue();
+        int currentYear = now.getYear();
+
+        int requestCount = LeaveDAO.countMonthlyLeaveRequests(userId, currentMonth, currentYear);
+        return requestCount < 3;
+    }
+
+    // ✅ New method to check for overlapping requests
+    public boolean hasOverlappingLeave(int userId, Date start, Date end) throws Exception {
+        return dao.isOverlappingLeave(userId, start, end);
     }
 }

@@ -1,6 +1,7 @@
 package com.tss.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class LeaveRequest {
 	  public int getId() {
@@ -45,4 +46,19 @@ public class LeaveRequest {
 	    private Date endDate;
 	    private String reason;
 	    private String status;
+	    
+	    public String getRejectionReason() {
+			return rejectionReason;
+		}
+		public void setRejectionReason(String rejectionReason) {
+			this.rejectionReason = rejectionReason;
+		}
+		public LocalDate getDecisionDate() {
+			return decisionDate;
+		}
+		public void setDecisionDate(LocalDate decisionDate) {
+			this.decisionDate = decisionDate;
+		}
+		private String rejectionReason;        
+	    private LocalDate decisionDate;       
 }
