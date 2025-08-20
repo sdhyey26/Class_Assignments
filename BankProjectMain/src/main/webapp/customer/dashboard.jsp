@@ -139,10 +139,10 @@
             <li class="active">Dashboard</li>
 			<li onclick="location.href='AccountInfoServlet'">Account Info</li>
             <li onclick="location.href='TransferServlet'">Transfer Funds</li>
-            <li onclick="location.href='passbook.jsp'">Passbook</li>
-            <li onclick="location.href='apply_card.jsp'">Apply Card</li>
-            <li onclick="location.href='card_status.jsp'">Card Status</li>
-            <li onclick="location.href='../logout.jsp'">Logout</li>
+            <li onclick="location.href='PassbookServlet'">Passbook</li>
+            <li onclick="location.href='CardApplicationServlet'">Apply Card</li>
+            <li onclick="location.href='CardStatusServlet'">Card Status</li>
+            <li onclick="location.href='logout.jsp'">Logout</li>
         </ul>
     </div>
 

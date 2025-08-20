@@ -8,7 +8,6 @@
         return;
     }
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +15,9 @@
     <title>Account Info</title>
     <style>
         body {
-            background-color: #2d2f3a;
+            background-color: #f4f4f4;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #fff;
+            color: #333;
             margin: 0;
             display: flex;
         }
@@ -26,7 +25,7 @@
         .sidebar {
             width: 220px;
             height: 100vh;
-            background-color: #1f2937;
+            background-color: #2c3e50;
             color: white;
             padding-top: 30px;
             position: fixed;
@@ -48,17 +47,11 @@
             padding: 15px 20px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            border-left: 4px solid transparent;
         }
 
-        .sidebar ul li:hover {
-            background-color: #374151;
-        }
-
+        .sidebar ul li:hover,
         .sidebar ul li.active {
-            background-color: #0ea5e9;
-            font-weight: bold;
-            border-left: 4px solid #0284c7;
+            background-color: #34495e;
         }
 
         .content {
@@ -68,36 +61,39 @@
         }
 
         h2 {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .account-heading {
+            margin: 30px 0 10px 0;
+            color: #3498db;
+            font-size: 1.2rem;
         }
 
         .account-table {
-            width: 70%;
+            width: 80%;
             border-collapse: collapse;
-            background-color: #3a3d4d;
+            background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             margin-bottom: 40px;
         }
 
         .account-table td {
-            padding: 12px 16px;
-            border-bottom: 1px solid #555;
+            padding: 14px 20px;
+            border-bottom: 1px solid #ddd;
         }
 
         .account-table td:first-child {
             font-weight: bold;
-            color: #ccc;
+            color: #555;
             width: 200px;
         }
 
         .account-table tr:last-child td {
             border-bottom: none;
-        }
-
-        .account-heading {
-            margin-bottom: 10px;
-            color: #38bdf8;
         }
     </style>
 </head>
@@ -109,10 +105,10 @@
         <li onclick="location.href='CustomerDashboardServlet'">Dashboard</li>
         <li class="active">Account Info</li>
         <li onclick="location.href='TransferServlet'">Transfer Funds</li>
-        <li onclick="location.href='passbook.jsp'">Passbook</li>
-        <li onclick="location.href='apply_card.jsp'">Apply Card</li>
-        <li onclick="location.href='card_status.jsp'">Card Status</li>
-        <li onclick="location.href='../logout.jsp'" style="margin-top: 20px;">Logout</li>
+        <li onclick="location.href='PassbookServlet'">Passbook</li>
+        <li onclick="location.href='CardApplicationServlet'">Apply Card</li>
+        <li onclick="location.href='CardStatusServlet'">Card Status</li>
+        <li onclick="location.href='logout.jsp'" style="margin-top: 20px;">Logout</li>
     </ul>
 </div>
 
@@ -120,14 +116,14 @@
     <h2>Your Account Information</h2>
 
     <% for (Account acc : accounts) { %>
-        <h3 class="account-heading"><%= acc.getAccountType() %> Account</h3>
+        <div class="account-heading"><%= acc.getAccountType() %> Account</div>
         <table class="account-table">
             <tr><td>Full Name</td><td><%= user.getFullName() %></td></tr>
             <tr><td>Username</td><td><%= user.getUsername() %></td></tr>
             <tr><td>Email</td><td><%= user.getEmail() %></td></tr>
             <tr><td>Account Number</td><td><%= acc.getAccountNumber() %></td></tr>
             <tr><td>Account Type</td><td><%= acc.getAccountType() %></td></tr>
-            <tr><td>Current Balance</td><td><%= acc.getBalance() %></td></tr>
+            <tr><td>Current Balance</td><td><%= String.format("%.2f", acc.getBalance()) %></td></tr>
         </table>
     <% } %>
 </div>

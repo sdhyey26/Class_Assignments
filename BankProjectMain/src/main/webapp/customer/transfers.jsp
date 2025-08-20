@@ -124,7 +124,6 @@ button:hover {
 </head>
 <body>
 
-	<!-- Sidebar -->
 	<div class="sidebar">
 		<h2>Bank Panel</h2>
 		<ul>
@@ -135,18 +134,20 @@ button:hover {
 				Info</li>
 			<li class="active">Transfer Funds</li>
 			<li
-				onclick="location.href='${pageContext.request.contextPath}/passbook.jsp'">Passbook</li>
+				onclick="location.href='${pageContext.request.contextPath}/PassbookServlet'">Passbook</li>
 			<li
-				onclick="location.href='${pageContext.request.contextPath}/apply_card.jsp'">Apply
+				onclick="location.href='${pageContext.request.contextPath}/CardApplicationServlet'">Apply
 				Card</li>
 			<li
-				onclick="location.href='${pageContext.request.contextPath}/card_status.jsp'">Card
+				onclick="location.href='${pageContext.request.contextPath}/CardStatusServlet'">Card
 				Status</li>
 			<li
 				onclick="location.href='${pageContext.request.contextPath}/logout.jsp'">Logout</li>
 
 		</ul>
 	</div>
+
+
 
 	<div class="container">
 		<h2>Transfer Funds</h2>

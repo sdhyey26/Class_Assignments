@@ -7,10 +7,9 @@ public class Transaction {
     private String fromAccount;
     private String toAccount;
     private double amount;
-    private String type; // "DEBIT" or "CREDIT"
+    private String type; 
     private Timestamp timestamp;
 
-    // Getters and Setters
     public int getId() {
         return id;
     }

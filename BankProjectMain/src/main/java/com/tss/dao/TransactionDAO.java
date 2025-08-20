@@ -3,6 +3,8 @@ package com.tss.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.tss.model.Transaction;
 import com.tss.util.DBConnection;
@@ -31,6 +33,78 @@ public class TransactionDAO {
 	    }
 	    return txn;
 	}
+	
+    public static List<Transaction> getAllTransactions(String accountNumber) {
+        List<Transaction> list = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT * FROM transactions WHERE from_account = ? OR to_account = ? ORDER BY timestamp DESC");
+            ps.setString(1, accountNumber);
+            ps.setString(2, accountNumber);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Transaction txn = new Transaction();
+                txn.setId(rs.getInt("id"));
+                txn.setFromAccount(rs.getString("from_account"));
+                txn.setToAccount(rs.getString("to_account"));
+                txn.setAmount(rs.getDouble("amount"));
+                txn.setType(rs.getString("type"));
+                txn.setTimestamp(rs.getTimestamp("timestamp"));
+                list.add(txn);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public static List<Transaction> getFilteredTransactions(String accountNumber, String type, String from, String to) {
+        List<Transaction> list = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM transactions WHERE (from_account = ? OR to_account = ?)");
 
+        if (type != null && !type.isEmpty()) {
+            sql.append(" AND type = ?");
+        }
+        if (from != null && !from.isEmpty()) {
+            sql.append(" AND DATE(timestamp) >= ?");
+        }
+        if (to != null && !to.isEmpty()) {
+            sql.append(" AND DATE(timestamp) <= ?");
+        }
 
+        sql.append(" ORDER BY timestamp DESC");
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql.toString())) {
+
+            int idx = 1;
+            ps.setString(idx++, accountNumber);
+            ps.setString(idx++, accountNumber);
+
+            if (type != null && !type.isEmpty()) {
+                ps.setString(idx++, type);
+            }
+            if (from != null && !from.isEmpty()) {
+                ps.setString(idx++, from);
+            }
+            if (to != null && !to.isEmpty()) {
+                ps.setString(idx++, to);
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Transaction txn = new Transaction();
+                txn.setId(rs.getInt("id"));
+                txn.setFromAccount(rs.getString("from_account"));
+                txn.setToAccount(rs.getString("to_account"));
+                txn.setAmount(rs.getDouble("amount"));
+                txn.setType(rs.getString("type"));
+                txn.setTimestamp(rs.getTimestamp("timestamp"));
+                list.add(txn);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
