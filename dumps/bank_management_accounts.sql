@@ -37,9 +37,10 @@ CREATE TABLE `accounts` (
   PRIMARY KEY (`account_id`),
   UNIQUE KEY `account_number` (`account_number`),
   UNIQUE KEY `aadhar_2` (`aadhar`,`account_type`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `unique_aadhar_accounttype` (`aadhar`,`account_type`),
+  KEY `accounts_ibfk_1` (`user_id`),
+  CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +49,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1,1,'100362079','Dhyey Shiyal','7069423407','dhyey.shiyal@tssconsultancy.com','abcdabcd','Savings',146500.00,'2025-08-19 05:56:56','Active'),(5,2,'100464349','Shreya k','1234567890','shreyak@gmail.com','12234567','Current',313500.00,'2025-08-19 09:48:35','Active'),(6,1,'10075908','Dhyey Shiyal','7069423407','dhyey.shiyal@tssconsultancy.com','abcdabcd','Current',205000.00,'2025-08-19 11:48:52','Active');
+INSERT INTO `accounts` VALUES (15,11,'100899310','Dhyey Shiyal','7069423407','dhyey.shiyal@tssconsultancy.com','12234567','Savings',27500.00,'2025-08-21 05:09:33','Active'),(16,12,'100608531','Vivek Acharya','7383931706','vivek@gmail.com','2551125270','Savings',27500.00,'2025-08-21 05:11:40','Active'),(17,11,'100661313','Dhyey Shiyal','7069423407','dhyey.shiyal@tssconsultancy.com','12234567','Current',95000.00,'2025-08-21 05:33:37','Active'),(18,13,'100359596','Neha singh','7069423487','neha@gmail.com','abcdabcd','Savings',15000.00,'2025-08-21 06:16:30','Active');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-20 11:15:01
+-- Dump completed on 2025-08-21 12:07:23

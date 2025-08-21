@@ -16,31 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admin_logs`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `admin_logs`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `admin_logs` (
-  `log_id` int NOT NULL AUTO_INCREMENT,
-  `admin_id` int DEFAULT NULL,
-  `action` varchar(255) DEFAULT NULL,
-  `target` varchar(100) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`log_id`),
-  KEY `admin_id` (`admin_id`),
-  CONSTRAINT `admin_logs_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `role` enum('Customer','Admin') NOT NULL,
+  `aadhar` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `aadhar` (`aadhar`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `admin_logs`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `admin_logs` WRITE;
-/*!40000 ALTER TABLE `admin_logs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `admin_logs` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (3,'admin','admin','Admin',NULL),(11,'Dhyey','1234','Customer',NULL),(12,'Vivek ','1234','Customer',NULL),(13,'Neha ','1212','Customer',NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-20 11:15:00
+-- Dump completed on 2025-08-21 12:05:37

@@ -16,33 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `card_applications`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `card_applications`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `role` enum('Customer','Admin') NOT NULL,
-  `status` enum('Active','Inactive') DEFAULT 'Active',
-  `aadhar` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `aadhar` (`aadhar`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `card_applications` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `account_number` varchar(20) DEFAULT NULL,
+  `card_type` enum('Debit','Credit') DEFAULT NULL,
+  `status` enum('Pending','Approved','Rejected') DEFAULT 'Pending',
+  `applied_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `approved_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_card_account` (`account_number`),
+  KEY `fk_card_user` (`user_id`),
+  CONSTRAINT `fk_card_account` FOREIGN KEY (`account_number`) REFERENCES `accounts` (`account_number`) ON DELETE CASCADE,
+  CONSTRAINT `fk_card_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `card_applications`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Dhyey','123123','Customer','Active',NULL),(2,'Shreya','456456','Customer','Active',NULL);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `card_applications` WRITE;
+/*!40000 ALTER TABLE `card_applications` DISABLE KEYS */;
+INSERT INTO `card_applications` VALUES (3,11,'100899310','Debit','Approved','2025-08-21 05:40:40','2025-08-21 05:46:54'),(4,13,'100359596','Debit','Pending','2025-08-21 06:17:35',NULL);
+/*!40000 ALTER TABLE `card_applications` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-20 11:14:59
+-- Dump completed on 2025-08-21 12:05:37

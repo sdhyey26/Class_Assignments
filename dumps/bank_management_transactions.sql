@@ -16,36 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `card_applications`
+-- Table structure for table `transactions`
 --
 
-DROP TABLE IF EXISTS `card_applications`;
+DROP TABLE IF EXISTS `transactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `card_applications` (
+CREATE TABLE `transactions` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `account_number` varchar(20) DEFAULT NULL,
-  `card_type` enum('Debit','Credit') DEFAULT NULL,
-  `status` enum('Pending','Approved','Rejected') DEFAULT 'Pending',
-  `applied_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `approved_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `account_number` (`account_number`),
-  CONSTRAINT `card_applications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `card_applications_ibfk_2` FOREIGN KEY (`account_number`) REFERENCES `accounts` (`account_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `from_account` varchar(20) DEFAULT NULL,
+  `to_account` varchar(20) DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  `type` varchar(10) DEFAULT NULL,
+  `timestamp` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `card_applications`
+-- Dumping data for table `transactions`
 --
 
-LOCK TABLES `card_applications` WRITE;
-/*!40000 ALTER TABLE `card_applications` DISABLE KEYS */;
-INSERT INTO `card_applications` VALUES (1,1,'100362079','Credit','Pending','2025-08-20 05:31:34',NULL);
-/*!40000 ALTER TABLE `card_applications` ENABLE KEYS */;
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (1,'100661313','100899310',5000,'DEBIT','2025-08-21 11:15:53'),(2,'100899310','100661313',5000,'CREDIT','2025-08-21 11:15:53');
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-20 11:14:59
+-- Dump completed on 2025-08-21 12:07:24
