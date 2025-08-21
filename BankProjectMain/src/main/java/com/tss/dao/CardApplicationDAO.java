@@ -98,4 +98,72 @@ public class CardApplicationDAO {
         }
         return false;
     }
+    
+    public static List<CardApplication> getPendingApplications() {
+        List<CardApplication> list = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM card_applications WHERE status = 'Pending'");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CardApplication app = new CardApplication();
+                app.setId(rs.getInt("id"));
+                app.setUserId(rs.getInt("user_id"));
+                app.setAccountNumber(rs.getString("account_number"));
+                app.setCardType(rs.getString("card_type"));
+                app.setStatus(rs.getString("status"));
+                app.setAppliedAt(rs.getTimestamp("applied_at"));
+                app.setApprovedAt(rs.getTimestamp("approved_at"));
+                list.add(app);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<CardApplication> getAllApplications() {
+        List<CardApplication> list = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM card_applications ORDER BY applied_at DESC");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CardApplication app = new CardApplication();
+                app.setId(rs.getInt("id"));
+                app.setUserId(rs.getInt("user_id"));
+                app.setAccountNumber(rs.getString("account_number"));
+                app.setCardType(rs.getString("card_type"));
+                app.setStatus(rs.getString("status"));
+                app.setAppliedAt(rs.getTimestamp("applied_at"));
+                app.setApprovedAt(rs.getTimestamp("approved_at"));
+                list.add(app);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<CardApplication> getApplicationsByStatus(String status) {
+        List<CardApplication> list = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM card_applications WHERE status = ? ORDER BY applied_at DESC");
+            ps.setString(1, status);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CardApplication app = new CardApplication();
+                app.setId(rs.getInt("id"));
+                app.setUserId(rs.getInt("user_id"));
+                app.setAccountNumber(rs.getString("account_number"));
+                app.setCardType(rs.getString("card_type"));
+                app.setStatus(rs.getString("status"));
+                app.setAppliedAt(rs.getTimestamp("applied_at"));
+                app.setApprovedAt(rs.getTimestamp("approved_at"));
+                list.add(app);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

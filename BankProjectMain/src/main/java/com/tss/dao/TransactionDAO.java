@@ -11,6 +11,8 @@ import com.tss.util.DBConnection;
 
 public class TransactionDAO {
 
+	
+	
 	public static Transaction getLastTransaction(String accountNumber) {
 	    Transaction txn = null;
 	    try (Connection con = DBConnection.getConnection()) {
@@ -34,13 +36,12 @@ public class TransactionDAO {
 	    return txn;
 	}
 	
-    public static List<Transaction> getAllTransactions(String accountNumber) {
+    public static List<Transaction> getAllTransactions() {
         List<Transaction> list = new ArrayList<>();
         try (Connection con = DBConnection.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                "SELECT * FROM transactions WHERE from_account = ? OR to_account = ? ORDER BY timestamp DESC");
-            ps.setString(1, accountNumber);
-            ps.setString(2, accountNumber);
+                "SELECT * FROM transactions ORDER BY timestamp DESC");
+           
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Transaction txn = new Transaction();
@@ -107,4 +108,29 @@ public class TransactionDAO {
         }
         return list;
     }
+    
+    public static List<Transaction> getTransactionsByAccount(String accountNumber) {
+        List<Transaction> list = new ArrayList<>();
+        try (Connection con = DBConnection.getConnection()) {
+            String sql = "SELECT * FROM transactions WHERE from_account = ? OR to_account = ? ORDER BY timestamp DESC";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, accountNumber);
+            ps.setString(2, accountNumber);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Transaction t = new Transaction();
+                t.setId(rs.getInt("id"));
+                t.setFromAccount(rs.getString("from_account"));
+                t.setToAccount(rs.getString("to_account"));
+                t.setAmount(rs.getDouble("amount"));
+                t.setType(rs.getString("type"));
+                t.setTimestamp(rs.getTimestamp("timestamp"));
+                list.add(t);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

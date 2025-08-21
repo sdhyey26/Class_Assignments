@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.tss.model.Account" %>
 <%@ page import="com.tss.model.User" %>
 
 <%
@@ -6,12 +8,11 @@
     String role = (String) session.getAttribute("role");
 
     if (user == null || !"Customer".equals(role)) {
-        response.sendRedirect("../login.jsp");
+        response.sendRedirect("login.jsp");
         return;
     }
 
-    String accountType = (String) request.getAttribute("accountType");
-    String balance = String.valueOf(request.getAttribute("balance"));
+    List<Account> accounts = (List<Account>) request.getAttribute("accounts");
     String lastTxn = (String) request.getAttribute("lastTxn");
 %>
 
@@ -133,43 +134,47 @@
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2>Bank Panel</h2>
-        <ul>
-            <li class="active">Dashboard</li>
-			<li onclick="location.href='AccountInfoServlet'">Account Info</li>
-            <li onclick="location.href='TransferServlet'">Transfer Funds</li>
-            <li onclick="location.href='PassbookServlet'">Passbook</li>
-            <li onclick="location.href='CardApplicationServlet'">Apply Card</li>
-            <li onclick="location.href='CardStatusServlet'">Card Status</li>
-            <li onclick="location.href='logout.jsp'">Logout</li>
-        </ul>
-    </div>
+<div class="sidebar">
+    <h2>Bank Panel</h2>
+    <ul>
+        <li class="active">Dashboard</li>
+        <li onclick="location.href='AccountInfoServlet'">Account Info</li>
+        <li onclick="location.href='TransferServlet'">Transfer Funds</li>
+        <li onclick="location.href='PassbookServlet'">Passbook</li>
+        <li onclick="location.href='CardApplicationServlet'">Apply Card</li>
+        <li onclick="location.href='CardStatusServlet'">Card Status</li>
+        <li onclick="location.href='logout.jsp'">Logout</li>
+    </ul>
+</div>
 
-    <div class="header">
-        <span class="greeting">Welcome, <%= user.getUsername() %>!</span>
-    </div>
+<div class="header">
+    <span class="greeting">Welcome, <%= user.getUsername() %>!</span>
+</div>
 
-    <div class="content">
-        <div class="dashboard-title">Customer Dashboard</div>
+<div class="content">
+    <div class="dashboard-title">Customer Dashboard</div>
 
-        <div class="card-container">
-            <div class="card card-blue">
-                <h3>Account Type</h3>
-                <p><strong><%= accountType %></strong></p>
-            </div>
+    <div class="card-container">
+        <% 
+            if (accounts != null) {
+                for (Account acc : accounts) {
+        %>
+        <div class="card card-blue">
+            <h3><%= acc.getAccountType() %> Account</h3>
+            <p><strong>Account No: <%= acc.getAccountNumber() %></strong></p>
+            <p>Balance: ₹<%= acc.getBalance() %></p>
+        </div>
+        <%
+                }
+            }
+        %>
 
-            <div class="card card-green">
-                <h3>Available Balance</h3>
-                <p><strong>₹<%= balance %></strong></p>
-            </div>
-
-            <div class="card card-purple">
-                <h3>Recent Transaction</h3>
-                <p><%= lastTxn %></p>
-            </div>
+        <div class="card card-purple">
+            <h3>Recent Transaction</h3>
+            <p><%= lastTxn != null ? lastTxn : "No transactions yet." %></p>
         </div>
     </div>
+</div>
 
 </body>
 </html>

@@ -35,7 +35,6 @@ public class CustomerDashboardServlet extends HttpServlet {
 
         User user = (User) session.getAttribute("user");
 
-        // Fetch all accounts of this user
         List<Account> accounts = AccountDAO.getAccountsByUserId(user.getUserId());
 
         if (accounts == null || accounts.isEmpty()) {
@@ -44,7 +43,6 @@ public class CustomerDashboardServlet extends HttpServlet {
             return;
         }
 
-        // Find latest transaction across all accounts
         Transaction latestTxn = null;
         Account accountWithLatestTxn = null;
 
@@ -57,16 +55,12 @@ public class CustomerDashboardServlet extends HttpServlet {
             }
         }
 
-        if (accountWithLatestTxn != null) {
-            request.setAttribute("accountType", accountWithLatestTxn.getAccountType());
-            request.setAttribute("balance", accountWithLatestTxn.getBalance());
-        }
+        request.setAttribute("accounts", accounts);
 
         if (latestTxn != null) {
-            String summary = latestTxn.getType().equals("DEBIT")
+            String summary = latestTxn.getType().equalsIgnoreCase("DEBIT")
                     ? "Sent ₹" + latestTxn.getAmount() + " to A/C " + latestTxn.getToAccount()
                     : "Received ₹" + latestTxn.getAmount() + " from A/C " + latestTxn.getFromAccount();
-
             request.setAttribute("lastTxn", summary);
         } else {
             request.setAttribute("lastTxn", "No transactions yet.");
