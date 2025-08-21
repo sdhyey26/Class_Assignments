@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tss.model.Account;
 import com.tss.util.DBConnection;
@@ -118,6 +121,69 @@ public class AccountDAO {
 	    }
 	    return false;
 	}
+	
+	public static Map<String, Integer> getAccountTypeStats() {
+	    Map<String, Integer> stats = new HashMap<>();
+	    try (Connection con = DBConnection.getConnection()) {
+	        String sql = "SELECT account_type, COUNT(*) as count FROM accounts GROUP BY account_type";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            stats.put(rs.getString("account_type"), rs.getInt("count"));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return stats;
+	}
 
+	public static Map<String, Double> getTotalBalanceByType() {
+	    Map<String, Double> map = new HashMap<>();
+	    try (Connection con = DBConnection.getConnection()) {
+	        String sql = "SELECT account_type, SUM(balance) as total FROM accounts GROUP BY account_type";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            map.put(rs.getString("account_type"), rs.getDouble("total"));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return map; 
+	}
+
+
+	public static Map<String, Integer> getMonthlyAccountStats() {
+	    Map<String, Integer> stats = new LinkedHashMap<>();
+	    try (Connection con = DBConnection.getConnection()) {
+	        String sql = "SELECT DATE_FORMAT(created_at, '%Y-%m') as month, COUNT(*) as count FROM accounts GROUP BY month ORDER BY month";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            stats.put(rs.getString("month"), rs.getInt("count"));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return stats;
+	}
+
+	public static List<Map<String, Object>> getTopUsersByBalance() {
+	    List<Map<String, Object>> topUsers = new ArrayList<>();
+	    try (Connection con = DBConnection.getConnection()) {
+	        String sql = "SELECT a.name, SUM(a.balance) as total FROM accounts a GROUP BY a.name ORDER BY total DESC LIMIT 5";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            Map<String, Object> data = new HashMap<>();
+	            data.put("name", rs.getString("name"));
+	            data.put("balance", rs.getDouble("total"));
+	            topUsers.add(data);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return topUsers;
+	}
 
 }

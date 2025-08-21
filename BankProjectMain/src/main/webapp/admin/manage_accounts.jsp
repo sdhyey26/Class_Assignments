@@ -113,6 +113,8 @@
         <li class="active">Manage Accounts</li>
         <li onclick="location.href='AdminTransactionServlet'">View Transactions</li>
         <li onclick="location.href='ManageCardRequestsServlet'">Card Requests</li>
+        <li onclick="location.href='AdminAnalysisServlet'">Analysis</li>
+        
         <li onclick="location.href='logout.jsp'" style="margin-top: 20px;">Logout</li>
     </ul>
 </div>

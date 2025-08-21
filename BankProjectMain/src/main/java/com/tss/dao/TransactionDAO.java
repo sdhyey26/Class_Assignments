@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tss.model.Transaction;
 import com.tss.util.DBConnection;
@@ -132,5 +134,21 @@ public class TransactionDAO {
         }
         return list;
     }
+    
+    public static Map<String, Integer> getMonthlyTransactionStats() {
+        Map<String, Integer> stats = new LinkedHashMap<>();
+        try (Connection con = DBConnection.getConnection()) {
+            String sql = "SELECT DATE_FORMAT(timestamp, '%Y-%m') as month, COUNT(*) as count FROM transactions GROUP BY month ORDER BY month";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                stats.put(rs.getString("month"), rs.getInt("count"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stats;
+    }
+
 
 }

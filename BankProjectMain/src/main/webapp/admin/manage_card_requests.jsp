@@ -123,6 +123,8 @@
         <li onclick="location.href='ManageAccountsServlet'">Manage Accounts</li>
         <li onclick="location.href='AdminTransactionServlet'">Transactions</li>
         <li class="active">Card Requests</li>
+        <li onclick="location.href='AdminAnalysisServlet'">Analysis</li>
+        
         <li onclick="location.href='logout.jsp'" style="margin-top: 20px;">Logout</li>
     </ul>
 </div>
