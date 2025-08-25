@@ -165,11 +165,10 @@ public class UserDAO {
 
     public static boolean updateUser(User user) {
         try (Connection con = DBConnection.getConnection()) {
-            String updateUserSQL = "UPDATE users SET username = ?, role = ? WHERE user_id = ?";
+            String updateUserSQL = "UPDATE users SET username = ? WHERE user_id = ?";
             PreparedStatement psUser = con.prepareStatement(updateUserSQL);
             psUser.setString(1, user.getUsername());
-            psUser.setString(2, user.getRole());
-            psUser.setInt(3, user.getUserId());
+            psUser.setInt(2, user.getUserId());
 
             int userRows = psUser.executeUpdate();
 

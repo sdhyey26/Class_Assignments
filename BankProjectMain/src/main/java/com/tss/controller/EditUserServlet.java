@@ -30,11 +30,10 @@ public class EditUserServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("userId"));
 		String fullName = request.getParameter("fullName");
 		String username = request.getParameter("username");
-		String role = request.getParameter("role");
 		String email = request.getParameter("email");
 
 
-		User user = new User(id, username, fullName, email, role);
+		User user = new User(id, username, fullName, email);
 		UserDAO.updateUser(user);
 		response.sendRedirect("ManageUsersServlet");
 		}

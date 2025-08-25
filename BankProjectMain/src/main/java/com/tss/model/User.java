@@ -5,20 +5,23 @@ import java.util.List;
 
 public class User {
 	public User(int userId, String username, String fullName, String email, String role) {
-	    this.userId = userId;
-	    this.username = username;
-	    this.FullName = fullName; 
-	    this.email = email;
-	    this.role = role;
+		this.userId = userId;
+		this.username = username;
+		this.FullName = fullName;
+		this.email = email;
+		this.role = role;
 	}
-	
-	
 
 	public User() {
 		super();
 	}
 
-
+	public User(int id, String username, String fullName, String email) {
+		this.userId = id;
+		this.username = username;
+		this.FullName = fullName;
+		this.email = email;
+	}
 
 	public int getUserId() {
 		return userId;

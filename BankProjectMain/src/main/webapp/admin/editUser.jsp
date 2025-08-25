@@ -125,11 +125,7 @@
         <label>Email</label>
         <input type="text" name="email" value="<%= user.getEmail() %>" required>
 
-        <label>Role</label>
-        <select name="role" required>
-            <option value="Customer" <%= "Customer".equals(user.getRole()) ? "selected" : "" %>>Customer</option>
-            <option value="Admin" <%= "Admin".equals(user.getRole()) ? "selected" : "" %>>Admin</option>
-        </select>
+ 
 
         <button class="btn" type="submit">Update</button>
     </form>

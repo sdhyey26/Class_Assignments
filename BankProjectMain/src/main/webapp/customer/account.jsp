@@ -13,6 +13,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Account Info</title>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
     <style>
         body {
             background-color: #f4f4f4;
@@ -49,8 +62,7 @@
             transition: background-color 0.3s ease;
         }
 
-        .sidebar ul li:hover,
-        .sidebar ul li.active {
+        .sidebar ul li:hover, .sidebar ul li.active {
             background-color: #34495e;
         }
 
@@ -77,7 +89,7 @@
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
         }
 
@@ -94,6 +106,27 @@
 
         .account-table tr:last-child td {
             border-bottom: none;
+        }
+
+        .dt-buttons {
+            margin-bottom: 20px;
+        }
+
+        .dt-button {
+            background-color: #3498db !important;
+            color: white !important;
+            border: none !important;
+            padding: 10px 16px !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            margin-right: 8px !important;
+            cursor: pointer !important;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dt-button:hover {
+            background-color: #2980b9 !important;
         }
     </style>
 </head>
@@ -117,16 +150,42 @@
 
     <% for (Account acc : accounts) { %>
         <div class="account-heading"><%= acc.getAccountType() %> Account</div>
-        <table class="account-table">
-            <tr><td>Full Name</td><td><%= user.getFullName() %></td></tr>
-            <tr><td>Username</td><td><%= user.getUsername() %></td></tr>
-            <tr><td>Email</td><td><%= user.getEmail() %></td></tr>
-            <tr><td>Account Number</td><td><%= acc.getAccountNumber() %></td></tr>
-            <tr><td>Account Type</td><td><%= acc.getAccountType() %></td></tr>
-            <tr><td>Current Balance</td><td><%= String.format("%.2f", acc.getBalance()) %></td></tr>
+
+        <table class="account-table" id="accountTable_<%= acc.getAccountNumber() %>">
+            <thead style="display:none;">
+                <tr><th>Field</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Full Name</td><td><%= user.getFullName() %></td></tr>
+                <tr><td>Username</td><td><%= user.getUsername() %></td></tr>
+                <tr><td>Email</td><td><%= user.getEmail() %></td></tr>
+                <tr><td>Account Number</td><td><%= acc.getAccountNumber() %></td></tr>
+                <tr><td>Account Type</td><td><%= acc.getAccountType() %></td></tr>
+                <tr><td>Current Balance</td><td><%= String.format("%.2f", acc.getBalance()) %></td></tr>
+            </tbody>
         </table>
     <% } %>
 </div>
+
+<script>
+    const accountTableIds = [
+        <% for (Account acc : accounts) { %>
+            "accountTable_<%= acc.getAccountNumber() %>",
+        <% } %>
+    ];
+
+    $(document).ready(function () {
+        accountTableIds.forEach(function (id) {
+            $('#' + id).DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5', 'print'],
+                paging: false,
+                searching: false,
+                info: false
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

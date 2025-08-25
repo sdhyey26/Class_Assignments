@@ -41,7 +41,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
     String accNumber = AccountDAO.getAccountByUserId(user.getUserId()).getAccountNumber();
 
-    // Fetch filters
     String type = request.getParameter("type");
     String fromDate = request.getParameter("from");
     String toDate = request.getParameter("to");
